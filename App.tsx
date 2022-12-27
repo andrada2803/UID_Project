@@ -1,12 +1,21 @@
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View } from 'react-native';
+import HomeScreen from './src/features/HomeScreen/HomeScreen';
+import TimetableScreen from './src/features/TimetableScreen/TimetableScreen';
+
+
+const MainStack = createNativeStackNavigator();
 
 export default function App() {
   return (
-    <View style={styles.container}>
-      <Text>Open up App.tsx to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <NavigationContainer>
+      <MainStack.Navigator initialRouteName="Home">
+        <MainStack.Screen name="Home" component={HomeScreen} />
+        <MainStack.Screen name="Timetable" component={TimetableScreen} />
+      </MainStack.Navigator>
+    </NavigationContainer>
   );
 }
 
