@@ -72,12 +72,12 @@ const styles = StyleSheet.create({
   },
 
   welcomeTitle:{
-    paddingTop:60,
+    paddingTop:100,
     fontSize:24,
   },
 
   usernameTitle:{
-    paddingTop:60,
+    paddingTop:100,
     fontSize:24,
     fontWeight:'bold'
   },

@@ -12,7 +12,7 @@ export default function App() {
   return (
     <NavigationContainer>
       <MainStack.Navigator initialRouteName="Home">
-        <MainStack.Screen name="Home" component={HomeScreen} />
+        <MainStack.Screen name="Home" component={HomeScreen} options={{headerShown: false}}/>
         <MainStack.Screen name="Timetable" component={TimetableScreen} />
       </MainStack.Navigator>
     </NavigationContainer>
