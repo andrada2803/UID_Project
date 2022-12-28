@@ -6,7 +6,7 @@ import GroupIcon from '../../assets/GroupIcon.svg'
 import ToDoListIcon from '../../assets/ToDoListIcon.svg'
 import GradebookIcon from '../../assets/GradebookIcon.svg'
 import SituationIcon from '../../assets/SituationIcon.svg'
-import PaymentsIcon from '../../assets/PaymentsIcon.svg'
+import PaymentsIcon from '../../assets/PaymentIcon.svg'
 import SettingsIcon from '../../assets/SettingsIcon.svg'
 
 // @ts-ignore
