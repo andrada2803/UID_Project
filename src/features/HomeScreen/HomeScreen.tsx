@@ -1,5 +1,5 @@
 import React from 'react'
-import { View,Text, Button, StyleSheet, Dimensions } from 'react-native'
+import { View,Text, Button, StyleSheet, Dimensions, Pressable } from 'react-native'
 import CalendarIcon from '../../assets/CalendarIcon.svg'
 import NotificationIcon from '../../assets/NotificationIcon.svg'
 import GroupIcon from '../../assets/GroupIcon.svg'
@@ -43,8 +43,10 @@ const HomeScreenButton = (props) => {
   const ButtonIcon = props.icon
   return (
     <View style = {styles.container}>
-      <ButtonIcon onPress={() => props.navigation.navigate(props.description)}/>
-      <Text style = {styles.title}>{props.description}</Text>
+      <Pressable style = {styles.container} onPress={() => props.navigation.navigate(props.description)}>
+        <ButtonIcon />
+        <Text style = {styles.title}>{props.description}</Text>
+      </Pressable>
     </View>
   )
 }
@@ -84,7 +86,6 @@ const styles = StyleSheet.create({
 
   container: {
     paddingTop:12,
-    paddingBottom:12,
     paddingLeft:16,
     paddingRight:16,
     backgroundColor: "#C2E8FF",
@@ -97,6 +98,7 @@ const styles = StyleSheet.create({
     marginTop: 14,
     textAlign: "center",
     fontSize: 12,
+    fontWeight:"bold"
   }
 });
 
