@@ -24,7 +24,7 @@ export default function App() {
         <MainStack.Screen name="Group" component={GroupScreen} />
         <MainStack.Screen name="Notifications" component={NotificationsScreen} />
         <MainStack.Screen name="ToDoList" component={ToDoListScreen} />
-        <MainStack.Screen name="Gradebook" component={GradebookScreen} />
+        <MainStack.Screen name="Gradebook" component={GradebookScreen} options={{headerTintColor:"white", headerStyle: {backgroundColor:"#006688"},headerTitleAlign:"left", headerBackTitle: "", statusBarColor:"#006688"}}/>
         <MainStack.Screen name="Situation" component={SituationScreen} />
         <MainStack.Screen name="Payments" component={PaymentsScreen} />
         <MainStack.Screen name="Settings" component={SettingsScreen} />
