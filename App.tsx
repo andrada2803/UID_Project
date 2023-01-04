@@ -2,11 +2,13 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View } from 'react-native';
+import { CreateAppointmentScreen } from './src/features/CreateAppointmentScreen/CreateAppointmentScreen';
 import { GradebookScreen } from './src/features/GradebookScreen/GradebookScreen';
 import { GroupScreen } from './src/features/GroupScreen/GroupScreen';
 import HomeScreen from './src/features/HomeScreen/HomeScreen';
 import { NotificationsScreen } from './src/features/NotificationsScreen/NotificationsScreen';
 import { PaymentsScreen } from './src/features/PaymentsScreen/PaymentsScreen';
+import { ReporOverlapScreen } from './src/features/ReportOverlapScreen/ReportOverlapScreen';
 import { SettingsScreen } from './src/features/SettingsScreen/SettingsScreen';
 import { SituationScreen } from './src/features/SituationScreen/SituationScreen';
 import TimetableScreen from './src/features/TimetableScreen/TimetableScreen';
@@ -28,6 +30,8 @@ export default function App() {
         <MainStack.Screen name="Situation" component={SituationScreen} />
         <MainStack.Screen name="Payments" component={PaymentsScreen} />
         <MainStack.Screen name="Settings" component={SettingsScreen} />
+        <MainStack.Screen name='Report Overlap' component={ReporOverlapScreen} />
+        <MainStack.Screen name='Create Appointment' component={CreateAppointmentScreen} /> 
       </MainStack.Navigator>
     </NavigationContainer>
   );
