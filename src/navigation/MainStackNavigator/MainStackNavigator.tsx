@@ -1,5 +1,8 @@
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import React from 'react';
+import ConfirmationScreen from 'src/components/ConfirmationScreen/ConfirmationScreen';
+import { ServiceCategory } from 'src/features/PaymentsScreen/ServiceCategory/ServiceCategory';
+import { ServiceList } from 'src/features/PaymentsScreen/ServiceList/ServiceList';
 import { GradebookScreen } from '../../features/GradebookScreen/GradebookScreen';
 import { GroupScreen } from '../../features/GroupScreen/GroupScreen';
 import HomeScreen from '../../features/HomeScreen/HomeScreen';
@@ -64,6 +67,24 @@ const MainStackNavigator = () => {
                 name='Settings'
                 component={SettingsScreen}
                 options={navigationHeaderOptions}
+            />
+
+            <MainStack.Screen
+                name='ServiceCategory'
+                component={ServiceCategory}
+                options={navigationHeaderOptions}
+            />
+            <MainStack.Screen
+                name='ServiceList'
+                component={ServiceList}
+                options={navigationHeaderOptions}
+            />
+            <MainStack.Screen
+                name='ConfirmationScreen'
+                component={ConfirmationScreen}
+                options={{
+                    headerShown: false,
+                }}
             />
         </MainStack.Navigator>
     );

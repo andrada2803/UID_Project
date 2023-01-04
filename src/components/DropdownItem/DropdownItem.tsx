@@ -1,11 +1,16 @@
-import React, { useState } from 'react';
-import { useRef } from 'react';
-import { Animated } from 'react-native';
-import { TouchableOpacity } from 'react-native';
-import { TouchableHighlight } from 'react-native';
-import { View, StyleSheet, Text } from 'react-native';
+import React, { useRef, useState } from 'react';
+import {
+    Animated,
+    StyleSheet,
+    Text,
+    TouchableOpacity,
+    View,
+} from 'react-native';
 
-import PendingIcon from 'src/assets/pendingIcon.svg';
+import AlertTriangleIcon from 'src/assets/alertTriangle.svg';
+import PendingIcon from 'src/assets/blueInfo.svg';
+import CheckIcon from 'src/assets/greenCheck.svg';
+import UpCaretIcon from 'src/assets/upCaret.svg';
 
 export enum DropdownItemIconType {
     PENDING = 'PENDING',
@@ -15,14 +20,17 @@ export enum DropdownItemIconType {
 
 const mappedIcons = {
     [DropdownItemIconType.PENDING]: <PendingIcon />,
-    [DropdownItemIconType.PAID]: <PendingIcon />,
-    [DropdownItemIconType.OVERDUE]: <PendingIcon />,
+    [DropdownItemIconType.PAID]: <CheckIcon />,
+    [DropdownItemIconType.OVERDUE]: <AlertTriangleIcon />,
 };
 
 export interface DropdownItemProps {
     title: string;
     content: string;
+    buttonText: string;
+    dueDateString?: string;
     icon?: DropdownItemIconType;
+    onButtonPress: () => void;
 }
 
 const DropdownItem: React.FC<DropdownItemProps> = (props) => {
@@ -40,9 +48,15 @@ const DropdownItem: React.FC<DropdownItemProps> = (props) => {
         return !contentShown;
     };
 
+    const arrowTransform = animationController.interpolate({
+        inputRange: [0, 1],
+        outputRange: ['0deg', '180deg'],
+    });
+
     return (
-        <View style={styles.container}>
+        <View>
             <TouchableOpacity
+                style={styles.buttonWrapper}
                 onPress={() =>
                     setShowContent((prevValue) =>
                         toggleContentAnimation(prevValue)
@@ -51,19 +65,45 @@ const DropdownItem: React.FC<DropdownItemProps> = (props) => {
             >
                 <View style={styles.tileContainer}>
                     <Text style={styles.titleText}>{props.title}</Text>
-                    {props.icon && mappedIcons[props.icon]}
+                    {props.icon ? (
+                        mappedIcons[props.icon]
+                    ) : (
+                        <Animated.View
+                            style={{ transform: [{ rotateZ: arrowTransform }] }}
+                        >
+                            <UpCaretIcon width={24} height={24} />
+                        </Animated.View>
+                    )}
                 </View>
             </TouchableOpacity>
             {showContent && (
                 <View style={styles.contentContainer}>
                     <Text style={styles.contentText}>{props.content}</Text>
-                    <View style={styles.contentActionContainer}>
-                        <View style={styles.timeContainer}>
-                            <Text style={styles.timeText}>Time Remaining</Text>
-                            <Text style={styles.timeText}>12:23:12</Text>
-                        </View>
-                        <TouchableOpacity style={styles.payButton}>
-                            <Text style={styles.payButtonText}>Pay 100RON</Text>
+                    <View
+                        style={[
+                            styles.contentActionContainer,
+                            {
+                                flexDirection: props.dueDateString
+                                    ? 'row'
+                                    : 'row-reverse',
+                            },
+                        ]}
+                    >
+                        {props.dueDateString && (
+                            <View style={styles.timeContainer}>
+                                <Text style={styles.timeText}>Due date</Text>
+                                <Text style={styles.timeText}>
+                                    {props.dueDateString}
+                                </Text>
+                            </View>
+                        )}
+                        <TouchableOpacity
+                            style={styles.payButton}
+                            onPress={props.onButtonPress}
+                        >
+                            <Text style={styles.payButtonText}>
+                                {props.buttonText}
+                            </Text>
                         </TouchableOpacity>
                     </View>
                 </View>
@@ -73,6 +113,15 @@ const DropdownItem: React.FC<DropdownItemProps> = (props) => {
 };
 
 const styles = StyleSheet.create({
+    buttonWrapper: {
+        shadowColor: 'rgba(0,0,0, .6)', // IOS
+        shadowOffset: { height: 2, width: 2 }, // IOS
+        shadowOpacity: 1, // IOS
+        shadowRadius: 4, //IOS
+        backgroundColor: '#fff',
+        elevation: 5, // Android
+        borderRadius: 8,
+    },
     payButtonText: {
         color: '#fff',
         fontFamily: 'Inter',
@@ -114,18 +163,7 @@ const styles = StyleSheet.create({
 
         elevation: 10,
     },
-    container: {
-        // display: 'flex',
-        // alignItems: 'center',
-        // shadowColor: '#000',
-        // shadowOffset: {
-        //     width: 0,
-        //     height: 6,
-        // },
-        // shadowOpacity: 0.37,
-        // shadowRadius: 7.49,
-        // elevation: 12,
-    },
+
     contentText: {
         fontFamily: 'Inter',
         fontStyle: 'normal',
@@ -158,36 +196,6 @@ const styles = StyleSheet.create({
         backgroundColor: '#fff',
         borderRadius: 8,
         padding: 16,
-        // boxShadow: '0px 4px 14px rgba(0, 0, 0, 0.1)',
-
-        // shadowColor: '#000',
-        // shadowOffset: {
-        //     width: 0,
-        //     height: 1,
-        // },
-        // shadowOpacity: 0.22,
-        // shadowRadius: 2.22,
-
-        // elevation: 3,
-
-        // shadowColor: '#000',
-        // shadowOffset: {
-        //     width: 0,
-        //     height: 6,
-        // },
-        // shadowOpacity: 0.37,
-        // shadowRadius: 7.49,
-
-        // elevation: 12,
-        shadowColor: '#fafafa',
-        shadowOffset: {
-            width: 0,
-            height: 10,
-        },
-        shadowOpacity: 1,
-        shadowRadius: 12,
-
-        elevation: 10,
     },
 
     listLabelText: {
@@ -207,8 +215,6 @@ const styles = StyleSheet.create({
 
         color: '#666666',
     },
-    scholarContainer: {},
-    servicesContainer: {},
 });
 
 export default DropdownItem;

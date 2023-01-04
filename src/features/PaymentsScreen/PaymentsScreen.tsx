@@ -1,32 +1,79 @@
 import React from 'react';
+import { FlatList } from 'react-native';
+import { ScrollView } from 'react-native';
 import { Text, View, StyleSheet } from 'react-native';
 import DropdownItem, {
     DropdownItemIconType,
 } from 'src/components/DropdownItem/DropdownItem';
+import { taxes } from 'src/mockData/Taxes';
+import AddIcon from 'src/assets/blueAddPlus.svg';
+import { TouchableOpacity } from 'react-native';
 
-export const PaymentsScreen = () => {
+//@ts-ignore
+export const PaymentsScreen = ({ navigation }) => {
     return (
-        <View style={styles.wrapper}>
-            <View style={styles.scholarContainer}>
-                <Text style={styles.listLabelText}>SCHOLAR</Text>
+        <>
+            <ScrollView style={styles.wrapper}>
+                <View>
+                    <Text style={styles.listLabelText}>SCHOLAR</Text>
 
-                <View style={styles.listWrapper}>
-                    <DropdownItem
-                        title='Taxe plm'
-                        content='Lorem ipsum dolor sit amet consectetur adipiscing elit Ut et massa mi. Aliquam in hendrerit urna. Pellentesque sit amet sapien fringilla, mattis ligula consectetur, ultrices mauris. Maecenas vitae mattis tellus. Nullam quis imperdiet augue. Vestibulum auctor ornare leo, non suscipit magna interdum eu. Curabitur pellentesque nibh nibh, at maximus ante.'
-                        icon={DropdownItemIconType.OVERDUE}
-                    />
+                    <View style={styles.listWrapper}>
+                        {taxes.map((item) => (
+                            <View
+                                key={JSON.stringify(item)}
+                                style={{ paddingBottom: 16 }}
+                            >
+                                <DropdownItem
+                                    title={item.title}
+                                    content={item.content}
+                                    dueDateString={item.dueDateString}
+                                    icon={item.icon}
+                                    buttonText={item.buttonText}
+                                    onButtonPress={item.onButtonPress}
+                                />
+                            </View>
+                        ))}
+                    </View>
                 </View>
-            </View>
 
-            <View style={styles.servicesContainer}>
-                <Text style={styles.listLabelText}>SERVICES</Text>
-            </View>
-        </View>
+                <View style={styles.servicesContainer}>
+                    <Text style={styles.listLabelText}>SERVICES</Text>
+                    <View style={styles.listWrapper}>
+                        {taxes.map((item) => (
+                            <View
+                                key={JSON.stringify(item)}
+                                style={{ paddingBottom: 16 }}
+                            >
+                                <DropdownItem
+                                    title={item.title}
+                                    content={item.content}
+                                    dueDateString={item.dueDateString}
+                                    icon={item.icon}
+                                    buttonText={item.buttonText}
+                                    onButtonPress={item.onButtonPress}
+                                />
+                            </View>
+                        ))}
+                    </View>
+                </View>
+            </ScrollView>
+
+            <TouchableOpacity
+                style={styles.addButtonContainer}
+                onPress={() => navigation.navigate('ServiceCategory')}
+            >
+                <AddIcon />
+            </TouchableOpacity>
+        </>
     );
 };
 
 const styles = StyleSheet.create({
+    addButtonContainer: {
+        position: 'absolute',
+        bottom: 10,
+        right: 16,
+    },
     wrapper: {
         display: 'flex',
         height: '100%',
@@ -45,8 +92,11 @@ const styles = StyleSheet.create({
     },
     listWrapper: {
         paddingTop: 16,
+        display: 'flex',
+        gap: 16,
         paddingBottom: 24,
     },
-    scholarContainer: {},
-    servicesContainer: {},
+    servicesContainer: {
+        paddingBottom: 80,
+    },
 });
