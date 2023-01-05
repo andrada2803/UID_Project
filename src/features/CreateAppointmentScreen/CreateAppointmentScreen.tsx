@@ -98,16 +98,8 @@ export const CreateAppointmentScreen = () => {
         padding: 20
     },
 
-    input: {
-        height: 40,
-        borderColor: 'gray',
-        borderWidth: 1,
-        marginBottom: 20,
-        padding: 10,
-        top: 30
-    },
-
     text: {
+        fontFamily: 'Inter',
         fontSize: 20,
         bottom: 10,
         top: 10
@@ -134,6 +126,7 @@ export const CreateAppointmentScreen = () => {
     },
 
     successText: {
+        fontFamily: 'Inter',
         textAlign: 'center',
         fontSize: 24,
         fontWeight: 'bold',
@@ -141,6 +134,7 @@ export const CreateAppointmentScreen = () => {
     },
 
     infoText: {
+        fontFamily: 'Inter',
         textAlign: 'center',
         fontSize: 20,
         padding: 50

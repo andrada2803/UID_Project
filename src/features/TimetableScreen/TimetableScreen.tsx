@@ -135,7 +135,6 @@ const TimetableScreen = ({navigation})  => {
           
           
           ]}
-          //JSON.stringify(event)
             eventOnPress={(event) => 
               Alert.alert(
                 'Course Title: ' + event.title + '\n' 
@@ -180,7 +179,7 @@ const styles = StyleSheet.create({
   screenLayout:{
     flexDirection: 'column',
     flex: 1,
-    backgroundColor: "white"
+    backgroundColor: "white",
   },
 
 
@@ -196,7 +195,9 @@ const styles = StyleSheet.create({
     marginTop: 14,
     textAlign: "center",
     fontSize: 12,
-    fontWeight:"bold"
+    fontWeight:"bold",
+    //fontFamily: 'Inter',
+
   },
 
   timetableView: {
@@ -211,6 +212,7 @@ const styles = StyleSheet.create({
     marginBottom:20,
     width: 170,
     height: 50,
+    fontFamily: 'Inter',
   },
 
   buttonStyleAppointment: {
@@ -221,6 +223,7 @@ const styles = StyleSheet.create({
     width: 170,
     height: 50,
     color: "#ffffff",
+    fontFamily: 'Inter',
   },
 
 });

@@ -59,7 +59,7 @@ export const ReporOverlapScreen = () => {
             <DropDownPicker
                 open={open2}
                 value={value2}
-                items={items2}
+                items={items2.filter((item) => item.value !== value)}
                 setOpen={setOpen2}
                 setValue={setValue2}
                 setItems={setItems2}
@@ -140,23 +140,27 @@ export const ReporOverlapScreen = () => {
 
     question1: {
         fontSize: 20,
+        fontFamily: 'Inter',
         bottom: 10,
         top: 10
     },
 
     question2: {
+        fontFamily: 'Inter',
         fontSize: 20,
         bottom: 10,
         top: 40
     },
 
     dropdown: {
+        fontFamily: 'Inter',
         top: 20,
         zIndex: 1000,
         elevation: 1000 
     },
 
     dropdown2: {
+        fontFamily: 'Inter',
         top: 20,
         zIndex:100,
         elevation:100
@@ -164,6 +168,7 @@ export const ReporOverlapScreen = () => {
     },
 
     submitButton: {
+        fontFamily: 'Inter',
         flex: 1,
         //bottom: 10,
         justifyContent: 'flex-end',
@@ -184,9 +189,11 @@ export const ReporOverlapScreen = () => {
         fontSize: 24,
         fontWeight: 'bold',
         padding: 30,
+        fontFamily: 'Inter',
     },
 
     infoText: {
+        fontFamily: 'Inter',
         textAlign: 'center',
         fontSize: 20,
         padding: 50
@@ -198,11 +205,13 @@ export const ReporOverlapScreen = () => {
     },
 
     additionalInfo: {
+        fontFamily: 'Inter',
         top: 70,
         fontSize:20
     },
 
     note: {
+        fontFamily: 'Inter',
         top: 70
     }
   

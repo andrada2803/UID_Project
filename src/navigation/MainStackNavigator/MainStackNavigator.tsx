@@ -12,6 +12,8 @@ import { SettingsScreen } from '../../features/SettingsScreen/SettingsScreen';
 import { SituationScreen } from '../../features/SituationScreen/SituationScreen';
 import TimetableScreen from '../../features/TimetableScreen/TimetableScreen';
 import { ToDoListScreen } from '../../features/ToDoListScreen/ToDoListScreen';
+import { ReporOverlapScreen } from '../../features/ReportOverlapScreen/ReportOverlapScreen';
+import { CreateAppointmentScreen } from '../../features/CreateAppointmentScreen/CreateAppointmentScreen';
 
 const MainStack = createNativeStackNavigator();
 const navigationHeaderOptions = {
@@ -86,6 +88,16 @@ const MainStackNavigator = () => {
                     headerShown: false,
                 }}
             />
+            <MainStack.Screen 
+                name='Report Overlap' 
+                component={ReporOverlapScreen} 
+                options={navigationHeaderOptions}
+            />
+            <MainStack.Screen 
+                name='Create Appointment' 
+                component={CreateAppointmentScreen} 
+                options={navigationHeaderOptions}
+            /> 
         </MainStack.Navigator>
     );
 };
