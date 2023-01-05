@@ -33,8 +33,18 @@ export const GradeDetailsScreen = ({ route, navigation }) => {
         </View>
 
         <View style = {{flexDirection:"row", justifyContent:"space-between", marginTop:20}}>
-            <ActionButton backColor={"#FFDAD6"} textColor={"#410002"} description={"RETAKE"}/>
-            <ActionButton backColor={"#006688"} textColor={"white"} description={"REQUEST"}/>
+            <ActionButton backColor={"#FFDAD6"} textColor={"#410002"} description={"RETAKE"} onChoice={() =>
+                            navigation.navigate('InformationScreen', {
+                                title: "Retake exam!",
+                                message: "Are you sure you want to retake this exam?",
+                            })
+                        }/>
+            <ActionButton backColor={"#006688"} textColor={"white"} description={"REQUEST"} onChoice={() =>
+                            navigation.navigate('InformationScreen', {
+                                title: "Request another review!",
+                                message: "Are you sure you want to request another review?",
+                            })
+                        }/>
         </View>
 
         </ScrollView>
@@ -44,7 +54,7 @@ export const GradeDetailsScreen = ({ route, navigation }) => {
 
 const ActionButton = (props:any) => {
     return (
-        <Pressable style= {[styles.actionButton, {backgroundColor: props.backColor}]}>
+        <Pressable style= {[styles.actionButton, {backgroundColor: props.backColor}]} onPress={props.onChoice}>
             <Text style= {[styles.actionText, {color: props.textColor}]}>{props.description}</Text>
         </Pressable>
     )
