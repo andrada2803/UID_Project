@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, TextInput, Button, StyleSheet, Text, Modal, Image } from 'react-native';
+import { View, Alert , Button, StyleSheet, Text, Modal, Image } from 'react-native';
 import DropDownPicker from 'react-native-dropdown-picker';
 import DatePicker from 'react-native-modern-datepicker';
 
@@ -16,6 +16,18 @@ export const CreateAppointmentScreen = () => {
     ]);
     const [selectedDate, setSelectedDate] = useState('');
     const [isModalVisible, setModalVisible] = useState(false);
+    const cuurentDate = new Date();
+    const minDate = cuurentDate.toISOString().substr(0,10)
+
+    const handleSubmit = () => {
+        if(value === null) {
+            Alert.alert('Error', 'Please select a reason');
+        }else if(selectedDate == ''){
+            Alert.alert('Error', 'Please select a date');
+        }else{
+            setModalVisible(true)
+        }
+    };
 
     return (
         <View style={styles.container}>
@@ -32,11 +44,16 @@ export const CreateAppointmentScreen = () => {
             style={styles.dropdown}
         />
         <DatePicker
+            minimumDate={minDate}
+            maximumDate='2023-12-23'
             style={styles.datePicker}
-            onSelectedChange={date => setSelectedDate(date)}/>
+            onSelectedChange={(date: React.SetStateAction<string>) => setSelectedDate(date)}/>
 
+        <Text style={styles.selectedDate}>
+            {selectedDate}
+        </Text>
         <View style={styles.submitButton}>
-                <Button title="Submit" onPress={() => setModalVisible(true)}/>
+                <Button title="Submit" onPress={handleSubmit}/>
 
                 <Modal
                     visible={isModalVisible}
@@ -136,6 +153,10 @@ export const CreateAppointmentScreen = () => {
 
     datePicker: {
       top: 60  
+    },
+    selectedDate: {
+        top: 40,
+        alignSelf: 'center'
     }
 
   
