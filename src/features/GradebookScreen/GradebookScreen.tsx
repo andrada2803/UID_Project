@@ -1,9 +1,15 @@
 import React, {useState, useEffect} from 'react'
 import { View, Text, ScrollView, StyleSheet } from 'react-native'
 import { GradeCard } from './GradeCard';
-import { Chip, Divider } from 'react-native-paper';
+import { Chip, Divider, Searchbar} from 'react-native-paper';
+import { Dropdown } from 'react-native-element-dropdown';
+import FilterIcon from '../../assets/charm_filter.svg'
 
 
+const data = [
+  { label: 'course', value: 'course' },
+  { label: 'year', value: 'year' },
+];
 
 export const GradebookScreen = () => {
 
@@ -11,6 +17,8 @@ export const GradebookScreen = () => {
   const[currentSemester, setCurrentSemester] = useState(false);
   const[missedGrades, setMissedGrades] = useState(false);
   const[filteredListGrades, setGradeList] = useState(allGradesList)
+  const[search, setSearch] = useState('')
+  const[currentFilter, setFilter] = useState('')
 
   function handleAllFilter() {
     setAll(true)
@@ -31,6 +39,27 @@ export const GradebookScreen = () => {
     setCurrentSemester(false)
     setMissedGrades(true)
     setGradeList(missedGradesList)
+  };
+
+  const updateSearch = (search:any) => {
+    setSearch(search);
+    if(currentFilter==="course"){
+      const searchedGradeListByCourse = allGradesList.filter(function (item) {
+        return item.courseTitle.includes(search);
+      });
+      setGradeList(searchedGradeListByCourse);
+    }
+    else{
+      if(currentFilter === "year"){
+        const searchedGradeListByYear = allGradesList.filter(function (item) {
+          return item.year===parseInt(search);
+        });
+        setGradeList(searchedGradeListByYear);
+      }
+      else{
+        setGradeList(allGradesList);
+      }
+    }
   };
 
   return (
@@ -71,7 +100,38 @@ export const GradebookScreen = () => {
 
     <Divider bold/>
       
+      {all &&
+      <View style={{flexDirection:"row", justifyContent:"space-evenly"}}>
+        <View style={{flex:2}}>
+        <Searchbar placeholderTextColor={"#9EA8BD"} placeholder="Search"
+      onChangeText={updateSearch}
+      value={search} style={{backgroundColor:"#E2E6EE", borderRadius:10, margin:10}} ></Searchbar></View>
       
+      
+        <View style={styles.dropdownContainer}>
+        
+          <FilterIcon style={{margin:10}}/>
+
+          <Dropdown
+          style={styles.dropdown}
+          placeholderStyle={styles.placeholderStyle}
+          selectedTextStyle={styles.selectedTextStyle}
+          iconStyle={styles.iconStyle}
+          data={data}
+          maxHeight={300}
+          labelField="label"
+          valueField="value"
+          placeholder=""
+          value={search}
+          onChange={item => {
+            setFilter(item.value);
+          }}
+        />
+        </View>
+
+                </View>
+      }
+
       <ScrollView contentContainerStyle={{ paddingVertical: 20 }}>
       {filteredListGrades.map(({ courseTitle, gradeDate, professor, year, credits, score, maxScore, type, isReview, key }) => (
         <GradeCard courseTitle = {courseTitle} gradeDate={gradeDate} professor={professor} year={year} credits={credits} score = {score} maxScore = {maxScore} type={type} isReview={isReview} key={key}/>
@@ -94,7 +154,6 @@ const styles = StyleSheet.create({
   },
 
 
-
   filterChipNotSelected:{
     backgroundColor:"white",
     borderRadius:32,
@@ -112,7 +171,41 @@ const styles = StyleSheet.create({
 
   filterChipTextSelected:{
     color:"white",
-  }
+  },
+
+  dropdownContainer:{
+    flexDirection:"row",
+    justifyContent:"space-evenly",
+    alignItems:"center",
+    backgroundColor:"#E2E6EE",
+    flex:1,
+    margin:10,
+    borderRadius:10
+  },
+
+  dropdown: {
+    borderBottomColor: 'gray',
+    width:85,
+    margin:10
+  },
+
+  icon: {
+    marginRight: 5,
+  },
+
+  placeholderStyle: {
+    fontSize: 8,
+  },
+
+  selectedTextStyle: {
+    fontSize: 16,
+  },
+
+  iconStyle: {
+    width: 16,
+    height: 16,
+  },
+
 
 });
 
@@ -155,7 +248,7 @@ const allGradesList = [
   },
   {
     key: 4,
-    courseTitle: "Special Mathematics",
+    courseTitle: "Marketing",
     gradeDate:"12/03/2022 at 15:40PM",
     professor:"Daniela Rosca",
     year:4,
