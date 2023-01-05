@@ -1,25 +1,46 @@
 import React, { useState } from 'react';
-import { View, TextInput, Button, StyleSheet, Text, Modal, Image } from 'react-native';
+import { View, Alert, Button, StyleSheet, Text, Modal, Image,TextInput } from 'react-native';
 import DropDownPicker from 'react-native-dropdown-picker';
     
 
 export const ReporOverlapScreen = () => {
 
-  const [open, setOpen] = useState(false);
-  const [value, setValue] = useState(null);
-  const [items, setItems] = useState([
-    {label: 'UID - Lab', value: 'uid'},
-    {label: 'DS - Lab', value: 'ds'},
-    {label: 'DBD - Lab', value: 'dbd'},
-    {label: 'TD - Lab', value: 'td'}
-]);
+    const [open, setOpen] = useState(false);
+    const [value, setValue] = useState(null);
+    const [items, setItems] = useState([
+        {label: 'UID - Lab', value: 'uid'},
+        {label: 'DS - Lab', value: 'ds'},
+        {label: 'DBD - Lab', value: 'dbd'},
+        {label: 'TD - Lab', value: 'td'}
+    ]);
+
+    const [open2, setOpen2] = useState(false);
+    const [value2, setValue2] = useState(null);
+    const [items2, setItems2] = useState([
+        {label: 'UID - Lab', value: 'uid'},
+        {label: 'DS - Lab', value: 'ds'},
+        {label: 'DBD - Lab', value: 'dbd'},
+        {label: 'TD - Lab', value: 'td'}
+    ]);
+
+    const [info, setInfo] = useState('')
 
     const [isModalVisible, setModalVisible] = useState(false);
+
+    const handleSubmit = () => {
+        if(value === null || value2 == null) {
+            Alert.alert('Error', 'Please select the classes');
+        }else{
+            setModalVisible(true)
+        }
+    };
+
     return (
         <View style={styles.container}>
-            <Text style={styles.text}>
+            <Text style={styles.question1}>
                 What class would you like to change?
             </Text>
+            <View style={styles.dropdown}>
             <DropDownPicker
                 open={open}
                 value={value}
@@ -27,22 +48,42 @@ export const ReporOverlapScreen = () => {
                 setOpen={setOpen}
                 setValue={setValue}
                 setItems={setItems}
-                style={styles.dropdown}
             />
-            {/* <TextInput
-                style={styles.input}
-                placeholder="Title"
-                value={title}
-                onChangeText={text => setTitle(text)}
+            </View>
+
+            <Text style={styles.question2}>
+                What is the class you would like to make the exchange with?
+            </Text>
+            
+            <View style={styles.dropdown2}>
+            <DropDownPicker
+                open={open2}
+                value={value2}
+                items={items2}
+                setOpen={setOpen2}
+                setValue={setValue2}
+                setItems={setItems2}
+                style={{top:30}}                
             />
+            </View>
+            <Text
+                style = {styles.additionalInfo}>
+                Any additional information? *
+            </Text>
+
             <TextInput
                 style={styles.input}
-                placeholder="Description"
-                value={description}
-                onChangeText={text => setDescription(text)}
-            /> */}
+                placeholder="Write something.."
+                value={info}
+                onChangeText={text => setInfo(text)}
+            />
+
+            <Text
+                style = {styles.note}>
+                What is marked with * is not mandatory
+            </Text>
             <View style={styles.submitButton}>
-                <Button title="Submit" onPress={() => setModalVisible(true)}/>
+                <Button title="Submit" onPress={handleSubmit}/>
 
                 <Modal
                     visible={isModalVisible}
@@ -91,17 +132,35 @@ export const ReporOverlapScreen = () => {
         borderWidth: 1,
         marginBottom: 20,
         padding: 10,
-        top: 30
+        top: 80,
+        fontSize: 16,
+        zIndex:10,
+        elevation:10
     },
 
-    text: {
+    question1: {
         fontSize: 20,
         bottom: 10,
         top: 10
     },
 
+    question2: {
+        fontSize: 20,
+        bottom: 10,
+        top: 40
+    },
+
     dropdown: {
-        top: 20
+        top: 20,
+        zIndex: 1000,
+        elevation: 1000 
+    },
+
+    dropdown2: {
+        top: 20,
+        zIndex:100,
+        elevation:100
+        
     },
 
     submitButton: {
@@ -136,8 +195,16 @@ export const ReporOverlapScreen = () => {
     textView: {
         //IDKKKK
         top: 220
-    }
+    },
 
+    additionalInfo: {
+        top: 70,
+        fontSize:20
+    },
+
+    note: {
+        top: 70
+    }
   
   });
   
