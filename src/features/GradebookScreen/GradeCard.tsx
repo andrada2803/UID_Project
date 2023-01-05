@@ -51,7 +51,7 @@ export const GradeCard = (props:any) => {
               :
                <ExamTypeLabel icon={ColoquimIcon} label = {"Coloquim"} color={"#F5E652"}/> } 
             {props.isReview &&
-                <Pressable style={styles.button} >
+                <Pressable style={styles.button} onPress={() => props.navigation.navigate("Grade", {courseTitle:props.courseTitle, gradeDate:props.gradeDate, professor:props.professor, year:props.year, credits:props.credits, score: props.score, maxScore:props.maxScore, type:props.type})}>
                     <Text style={styles.buttonText}>{"Review"}</Text>
                 </Pressable>   
             }   

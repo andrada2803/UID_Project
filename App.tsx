@@ -3,6 +3,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View } from 'react-native';
 import { GradebookScreen } from './src/features/GradebookScreen/GradebookScreen';
+import { GradeDetailsScreen } from './src/features/GradebookScreen/GradeDetailsScreen';
 import { GroupScreen } from './src/features/GroupScreen/GroupScreen';
 import HomeScreen from './src/features/HomeScreen/HomeScreen';
 import { NotificationsScreen } from './src/features/NotificationsScreen/NotificationsScreen';
@@ -28,6 +29,7 @@ export default function App() {
         <MainStack.Screen name="Situation" component={SituationScreen} />
         <MainStack.Screen name="Payments" component={PaymentsScreen} />
         <MainStack.Screen name="Settings" component={SettingsScreen} />
+        <MainStack.Screen name="Grade" component={GradeDetailsScreen} options={{headerTintColor:"white", headerStyle: {backgroundColor:"#006688"},headerTitleAlign:"left", headerBackTitle: "", statusBarColor:"#006688"}}/>
       </MainStack.Navigator>
     </NavigationContainer>
   );

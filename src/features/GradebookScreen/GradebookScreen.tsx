@@ -11,7 +11,8 @@ const data = [
   { label: 'year', value: 'year' },
 ];
 
-export const GradebookScreen = () => {
+// @ts-ignore
+export const GradebookScreen = ({navigation}) => {
 
   const [all, setAll] = useState(true);
   const[currentSemester, setCurrentSemester] = useState(false);
@@ -134,7 +135,7 @@ export const GradebookScreen = () => {
 
       <ScrollView contentContainerStyle={{ paddingVertical: 20 }}>
       {filteredListGrades.map(({ courseTitle, gradeDate, professor, year, credits, score, maxScore, type, isReview, key }) => (
-        <GradeCard courseTitle = {courseTitle} gradeDate={gradeDate} professor={professor} year={year} credits={credits} score = {score} maxScore = {maxScore} type={type} isReview={isReview} key={key}/>
+        <GradeCard navigation={navigation} courseTitle = {courseTitle} gradeDate={gradeDate} professor={professor} year={year} credits={credits} score = {score} maxScore = {maxScore} type={type} isReview={isReview} key={key}/>
       ))}
       </ScrollView>
     </View>
