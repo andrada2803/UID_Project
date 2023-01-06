@@ -101,7 +101,7 @@ const styles = StyleSheet.create({
   }, 
   container: {
     flex: 1,
-    padding: 20,
+    padding: 10,
   },
   checkbox: {
     margin: 8,
@@ -110,9 +110,9 @@ const styles = StyleSheet.create({
     height: 40,
     borderColor: 'gray',
     borderWidth: 1,
-    marginBottom: 20,
+    marginBottom: 40,
     padding: 10,
-    marginTop: 20
+    marginTop: 10
   },
   section: {
     flexDirection: 'row',
@@ -124,7 +124,8 @@ const styles = StyleSheet.create({
   button: {
     padding: 10,
     borderRadius: 10,
-    backgroundColor: '#006688'
+    backgroundColor: '#006688',
+    bottom:30
   },
   buttonText: {
     color: 'white',
