@@ -24,6 +24,8 @@ const navigationHeaderOptions = {
         backgroundColor: '#006688',
     },
     headerTintColor: '#fff',
+    headerBackTitle: "",
+    statusBarColor:"#006688"
 };
 
 const MainStackNavigator = () => {
