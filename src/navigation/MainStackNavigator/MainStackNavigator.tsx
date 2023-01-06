@@ -14,6 +14,8 @@ import TimetableScreen from '../../features/TimetableScreen/TimetableScreen';
 import { ToDoListScreen } from '../../features/ToDoListScreen/ToDoListScreen';
 import { ReporOverlapScreen } from '../../features/ReportOverlapScreen/ReportOverlapScreen';
 import { CreateAppointmentScreen } from '../../features/CreateAppointmentScreen/CreateAppointmentScreen';
+import { InformationScreen } from 'src/components/InformationScreen';
+import { GradeDetailsScreen } from 'src/features/GradebookScreen/GradeDetailsScreen';
 
 const MainStack = createNativeStackNavigator();
 const navigationHeaderOptions = {
@@ -98,6 +100,18 @@ const MainStackNavigator = () => {
                 component={CreateAppointmentScreen} 
                 options={navigationHeaderOptions}
             /> 
+            <MainStack.Screen
+                name='InformationScreen'
+                component={InformationScreen}
+                options={{
+                    headerShown: false,
+                }}
+            />
+            <MainStack.Screen
+                name='Grade'
+                component={GradeDetailsScreen}
+                options={navigationHeaderOptions}
+            />
         </MainStack.Navigator>
     );
 };
