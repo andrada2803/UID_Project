@@ -28,7 +28,10 @@ export const InformationScreen = ({ navigation, route }) => {
 
             <TouchableOpacity
                 style={styles.submitButton}
-                onPress={() => navigation.dispatch(StackActions.pop(3))}
+                onPress={() => navigation.navigate('ConfirmationScreen', {
+                    title: "Request sent successfully!",
+                    message: "Check your email for further details",
+                })}
             >
                 <Text style={styles.submitText}>SUBMIT</Text>
             </TouchableOpacity>
