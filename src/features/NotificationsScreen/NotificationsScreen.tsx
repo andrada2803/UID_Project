@@ -20,14 +20,11 @@ export const NotificationsScreen = ({navigation}) => {
         <NotificationContainer 
           navigation={navigation} 
           route={"ToDoList"}
-          notificationText={"There is an assignment added! Check it now to submit it on time!"}/>
-
-          
+          notificationText={"There is an assignment added! Check it now to submit it on time!"}/>   
       </ScrollView>
     </View>
   )
 }
-
 
 // @ts-ignore
 const NotificationContainer = (props) => {
