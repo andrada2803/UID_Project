@@ -200,7 +200,7 @@ export const SituationScreen = () => {
                   )}
 
                   <RankIcon width={50} height={40}/>
-                  <Text style={styles.rankText}>1/120</Text>
+                  <Text style={styles.rankText}>25/120</Text>
                </TouchableOpacity>
               
             </View>
@@ -350,7 +350,7 @@ export const SituationScreen = () => {
                   )}
 
                   <RankIcon width={50} height={40}/>
-                  <Text style={styles.rankText}>1/120</Text>
+                  <Text style={styles.rankText}>62/120</Text>
                </TouchableOpacity>
               
             </View>
@@ -389,165 +389,6 @@ export const SituationScreen = () => {
           </View>
 
         </View>
-
-        {/* <View style={styles.detailsContainer2}>
-          <Text style={styles.title}>2nd Year</Text>
-
-          <View style={styles.gradesContainer}>
-            <View style={[styles.view, styles.view1]}>
-              <Text style={styles.grades}>
-                8.20
-              </Text>
-              <View style={styles.corner}>
-                <Text style={styles.semesters}>
-                  I
-                </Text>
-              </View>
-            </View>
-
-            <View style={[styles.view, styles.view2]}>
-              <Text style={styles.grades}>
-                9.32
-              </Text>
-              <View style={styles.corner}>
-                <Text style={styles.semesters}>
-                  II
-                </Text>
-              </View>
-            </View>
-          </View>
-
-          <View style={styles.infoWithIcons}>
-            <View style={styles.info}> 
-              <RankIcon width={50} height={40}/>
-              <Text style={styles.rankText}>1/120</Text>
-            </View>
-
-            <View style={styles.info}> 
-              <CreditsIcon width={40} height={40}/>
-              <Text style={styles.rankText}>60/60</Text>
-            </View>
-          </View>
-
-          <View style={styles.infoWithIcons2}>
-            <View style={styles.info2}> 
-              <ScholarshipIcon width={50} height={40}/>
-              <Text style={styles.rankText}>YES</Text>
-            </View>
-
-            <View style={styles.info2}> 
-              <CashIcon width={40} height={40}/>
-              <Text style={styles.rankText}>FREE</Text>
-            </View>
-          </View>
-
-        </View>
-
-        <View style={styles.detailsContainer3}>
-          <Text style={styles.title}>3rd Year</Text>
-
-          <View style={styles.gradesContainer}>
-            <View style={[styles.view, styles.view1]}>
-              <Text style={styles.grades}>
-                10
-              </Text>
-              <View style={styles.corner}>
-                <Text style={styles.semesters}>
-                  I
-                </Text>
-              </View>
-            </View>
-
-            <View style={[styles.view, styles.view2]}>
-              <Text style={styles.grades}>
-                10
-              </Text>
-              <View style={styles.corner}>
-                <Text style={styles.semesters}>
-                  II
-                </Text>
-              </View>
-            </View>
-          </View>
-
-          <View style={styles.infoWithIcons}>
-            <View style={styles.info}> 
-              <RankIcon width={50} height={40}/>
-              <Text style={styles.rankText}>1/120</Text>
-            </View>
-
-            <View style={styles.info}> 
-              <CreditsIcon width={40} height={40}/>
-              <Text style={styles.rankText}>60/60</Text>
-            </View>
-          </View>
-
-          <View style={styles.infoWithIcons2}>
-            <View style={styles.info2}> 
-              <ScholarshipIcon width={50} height={40}/>
-              <Text style={styles.rankText}>YES</Text>
-            </View>
-
-            <View style={styles.info2}> 
-              <CashIcon width={40} height={40}/>
-              <Text style={styles.rankText}>FREE</Text>
-            </View>
-          </View>
-
-        </View>
-
-        <View style={styles.detailsContainer4}>
-          <Text style={styles.title}>4th Year</Text>
-
-          <View style={styles.gradesContainer}>
-            <View style={[styles.view, styles.view1]}>
-              <Text style={styles.grades}>
-                7.1
-              </Text>
-              <View style={styles.corner}>
-                <Text style={styles.semesters}>
-                  I
-                </Text>
-              </View>
-            </View>
-
-            <View style={[styles.view, styles.view2]}>
-              <Text style={styles.grades}>
-                7.9
-              </Text>
-              <View style={styles.corner}>
-                <Text style={styles.semesters}>
-                  II
-                </Text>
-              </View>
-            </View>
-          </View>
-
-          <View style={styles.infoWithIcons}>
-            <View style={styles.info}> 
-              <RankIcon width={50} height={40}/>
-              <Text style={styles.rankText}>1/120</Text>
-            </View>
-
-            <View style={styles.info}> 
-              <CreditsIcon width={40} height={40}/>
-              <Text style={styles.rankText}>60/60</Text>
-            </View>
-          </View>
-
-          <View style={styles.infoWithIcons2}>
-            <View style={styles.info2}> 
-              <ScholarshipIcon width={50} height={40}/>
-              <Text style={styles.rankText}>YES</Text>
-            </View>
-
-            <View style={styles.info2}> 
-              <CashIcon width={40} height={40}/>
-              <Text style={styles.rankText}>FREE</Text>
-            </View>
-          </View>
-
-        </View> */}
 
       </View>
       <View style={{height: 200}}/>
