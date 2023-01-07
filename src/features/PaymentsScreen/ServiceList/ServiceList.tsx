@@ -2,15 +2,23 @@ import React from 'react';
 import { StyleSheet, View } from 'react-native';
 
 import { ScrollView } from 'react-native';
-import DropdownItem from 'src/components/DropdownItem/DropdownItem';
-import { services } from 'src/mockData/Taxes';
+import DropdownItem, {
+    DropdownItemIconType,
+} from 'src/components/DropdownItem/DropdownItem';
+import { addTax } from 'src/stores/paymentSlice';
+import { useAppDispatch, useAppSelector } from 'src/stores/store';
 
 const confirmationScreenTitle = 'Service requested successfully!';
 const confirmationScreenMessage =
     'This will be available to pay in the main taxes screen.';
 
+const newTaxDueDate = '12 July 2023';
+const newTaxPrice = 321;
+
 //@ts-ignore
 export const ServiceList = ({ navigation }) => {
+    const services = useAppSelector((state) => state.payments.services);
+    const dispatch = useAppDispatch();
     return (
         <ScrollView contentContainerStyle={styles.wrapper}>
             {services.map((item) => (
@@ -18,15 +26,21 @@ export const ServiceList = ({ navigation }) => {
                     <DropdownItem
                         title={item.title}
                         content={item.content}
-                        dueDateString={item.dueDateString}
-                        icon={item.icon}
-                        buttonText={item.buttonText}
-                        onButtonPress={() =>
+                        buttonText={'Select'}
+                        onButtonPress={() => {
+                            const newTax = {
+                                title: item.title,
+                                content: item.content,
+                                dueDateString: newTaxDueDate,
+                                price: newTaxPrice,
+                                status: DropdownItemIconType.PENDING,
+                            };
+                            dispatch(addTax(newTax));
                             navigation.navigate('ConfirmationScreen', {
                                 title: confirmationScreenTitle,
                                 message: confirmationScreenMessage,
-                            })
-                        }
+                            });
+                        }}
                     />
                 </View>
             ))}

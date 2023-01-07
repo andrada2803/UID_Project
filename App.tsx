@@ -2,6 +2,8 @@ import { NavigationContainer } from '@react-navigation/native';
 import MainStackNavigator from './src/navigation/MainStackNavigator/MainStackNavigator';
 import { useFonts } from 'expo-font';
 import React from 'react';
+import { Provider } from 'react-redux';
+import { store } from 'src/stores/store';
 
 export default function App() {
     const [fontsLoaded] = useFonts({
@@ -11,8 +13,10 @@ export default function App() {
     if (!fontsLoaded) return null;
 
     return (
-        <NavigationContainer>
-            <MainStackNavigator />
-        </NavigationContainer>
+        <Provider store={store}>
+            <NavigationContainer>
+                <MainStackNavigator />
+            </NavigationContainer>
+        </Provider>
     );
 }

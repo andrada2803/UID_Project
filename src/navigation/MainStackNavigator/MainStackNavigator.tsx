@@ -1,21 +1,21 @@
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import React from 'react';
 import ConfirmationScreen from 'src/components/ConfirmationScreen/ConfirmationScreen';
+import { InformationScreen } from 'src/components/InformationScreen';
+import { GradeDetailsScreen } from 'src/features/GradebookScreen/GradeDetailsScreen';
+import { PaymentsScreen } from 'src/features/PaymentsScreen/PaymentsScreen';
 import { ServiceCategory } from 'src/features/PaymentsScreen/ServiceCategory/ServiceCategory';
 import { ServiceList } from 'src/features/PaymentsScreen/ServiceList/ServiceList';
+import { CreateAppointmentScreen } from '../../features/CreateAppointmentScreen/CreateAppointmentScreen';
 import { GradebookScreen } from '../../features/GradebookScreen/GradebookScreen';
 import { GroupScreen } from '../../features/GroupScreen/GroupScreen';
 import HomeScreen from '../../features/HomeScreen/HomeScreen';
 import { NotificationsScreen } from '../../features/NotificationsScreen/NotificationsScreen';
-import { PaymentsScreen } from '../../features/PaymentsScreen/PaymentsScreen';
+import { ReporOverlapScreen } from '../../features/ReportOverlapScreen/ReportOverlapScreen';
 import { SettingsScreen } from '../../features/SettingsScreen/SettingsScreen';
 import { SituationScreen } from '../../features/SituationScreen/SituationScreen';
 import TimetableScreen from '../../features/TimetableScreen/TimetableScreen';
 import { ToDoListScreen } from '../../features/ToDoListScreen/ToDoListScreen';
-import { ReporOverlapScreen } from '../../features/ReportOverlapScreen/ReportOverlapScreen';
-import { CreateAppointmentScreen } from '../../features/CreateAppointmentScreen/CreateAppointmentScreen';
-import { InformationScreen } from 'src/components/InformationScreen';
-import { GradeDetailsScreen } from 'src/features/GradebookScreen/GradeDetailsScreen';
 
 const MainStack = createNativeStackNavigator();
 const navigationHeaderOptions = {
@@ -24,8 +24,8 @@ const navigationHeaderOptions = {
         backgroundColor: '#006688',
     },
     headerTintColor: '#fff',
-    headerBackTitle: "",
-    statusBarColor:"#006688"
+    headerBackTitle: '',
+    statusBarColor: '#006688',
 };
 
 const MainStackNavigator = () => {
@@ -43,7 +43,7 @@ const MainStackNavigator = () => {
                 component={TimetableScreen}
                 options={navigationHeaderOptions}
             />
-            <MainStack.Screen 
+            <MainStack.Screen
                 name='Group'
                 component={GroupScreen}
                 options={navigationHeaderOptions}
@@ -96,16 +96,16 @@ const MainStackNavigator = () => {
                     headerShown: false,
                 }}
             />
-            <MainStack.Screen 
-                name='Report Overlap' 
-                component={ReporOverlapScreen} 
+            <MainStack.Screen
+                name='Report Overlap'
+                component={ReporOverlapScreen}
                 options={navigationHeaderOptions}
             />
-            <MainStack.Screen 
-                name='Create Appointment' 
-                component={CreateAppointmentScreen} 
+            <MainStack.Screen
+                name='Create Appointment'
+                component={CreateAppointmentScreen}
                 options={navigationHeaderOptions}
-            /> 
+            />
             <MainStack.Screen
                 name='InformationScreen'
                 component={InformationScreen}

@@ -30,7 +30,7 @@ export interface DropdownItemProps {
     buttonText: string;
     dueDateString?: string;
     icon?: DropdownItemIconType;
-    onButtonPress: () => void;
+    onButtonPress?: () => void;
 }
 
 const DropdownItem: React.FC<DropdownItemProps> = (props) => {
@@ -39,7 +39,7 @@ const DropdownItem: React.FC<DropdownItemProps> = (props) => {
 
     const toggleContentAnimation = (contentShown: boolean) => {
         const config = {
-            duration: 400,
+            duration: 300,
             toValue: contentShown ? 0 : 1,
             useNativeDriver: true,
         };
@@ -50,7 +50,7 @@ const DropdownItem: React.FC<DropdownItemProps> = (props) => {
 
     const arrowTransform = animationController.interpolate({
         inputRange: [0, 1],
-        outputRange: ['0deg', '180deg'],
+        outputRange: ['0deg', '90deg'],
     });
 
     return (
@@ -71,7 +71,13 @@ const DropdownItem: React.FC<DropdownItemProps> = (props) => {
                         <Animated.View
                             style={{ transform: [{ rotateZ: arrowTransform }] }}
                         >
-                            <UpCaretIcon width={24} height={24} />
+                            <UpCaretIcon
+                                width={24}
+                                height={24}
+                                style={{
+                                    transform: [{ rotate: '90deg' }],
+                                }}
+                            />
                         </Animated.View>
                     )}
                 </View>

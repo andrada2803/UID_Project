@@ -1,16 +1,18 @@
 import React from 'react';
-import { FlatList } from 'react-native';
-import { ScrollView } from 'react-native';
-import { Text, View, StyleSheet } from 'react-native';
-import DropdownItem, {
-    DropdownItemIconType,
-} from 'src/components/DropdownItem/DropdownItem';
-import { taxes } from 'src/mockData/Taxes';
+import {
+    ScrollView,
+    StyleSheet,
+    Text,
+    TouchableOpacity,
+    View,
+} from 'react-native';
 import AddIcon from 'src/assets/blueAddPlus.svg';
-import { TouchableOpacity } from 'react-native';
+import DropdownItem from 'src/components/DropdownItem/DropdownItem';
+import { useAppSelector } from 'src/stores/store';
 
 //@ts-ignore
 export const PaymentsScreen = ({ navigation }) => {
+    const taxes = useAppSelector((state) => state.payments.taxes);
     return (
         <>
             <ScrollView style={styles.wrapper}>
@@ -27,9 +29,8 @@ export const PaymentsScreen = ({ navigation }) => {
                                     title={item.title}
                                     content={item.content}
                                     dueDateString={item.dueDateString}
-                                    icon={item.icon}
-                                    buttonText={item.buttonText}
-                                    onButtonPress={item.onButtonPress}
+                                    icon={item.status}
+                                    buttonText={`Pay ${item.price}RON`}
                                 />
                             </View>
                         ))}
@@ -48,9 +49,8 @@ export const PaymentsScreen = ({ navigation }) => {
                                     title={item.title}
                                     content={item.content}
                                     dueDateString={item.dueDateString}
-                                    icon={item.icon}
-                                    buttonText={item.buttonText}
-                                    onButtonPress={item.onButtonPress}
+                                    icon={item.status}
+                                    buttonText={`Pay ${item.price}RON`}
                                 />
                             </View>
                         ))}
