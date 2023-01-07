@@ -45,7 +45,11 @@ const MainStackNavigator = () => {
                 component={TimetableScreen}
                 options={navigationHeaderOptions}
             />
-            <MainStack.Screen name='Group' component={GroupScreen} />
+            <MainStack.Screen 
+                name='Group'
+                component={GroupScreen}
+                options={navigationHeaderOptions}
+            />
             <MainStack.Screen
                 name='Notifications'
                 component={NotificationsScreen}
