@@ -17,6 +17,7 @@ const confirmationScreenMessage =
 export const PaymentDetails = ({ navigation }) => {
     const currentPayment = useAppSelector((state) => state.settings.payment);
     const [newPayment, setNewPayment] = React.useState(currentPayment);
+
     const dispatch = useAppDispatch();
 
     const isButtonDisabled =
@@ -105,13 +106,12 @@ export const PaymentDetails = ({ navigation }) => {
             </View>
 
             <TouchableOpacity
-                // style={styles.buttonContainer}
                 style={[
                     styles.buttonContainer,
                     isButtonDisabled ? { backgroundColor: '#E2E6EE' } : {},
                 ]}
                 onPress={() => {
-                    dispatch(updatePayment(currentPayment));
+                    dispatch(updatePayment(newPayment));
                     navigation.navigate('ConfirmationScreen', {
                         title: confirmationScreenTitle,
                         message: confirmationScreenMessage,
@@ -167,30 +167,8 @@ const styles = StyleSheet.create({
         display: 'flex',
         height: '100%',
         backgroundColor: '#fafafa',
-        // alignItems: 'center',
-        // justifyContent: 'center',
         paddingVertical: 26,
         paddingHorizontal: 18,
-    },
-
-    titleText: {
-        marginTop: 60,
-
-        fontFamily: 'Inter',
-        fontStyle: 'normal',
-        fontWeight: '700',
-        fontSize: 20,
-        textAlign: 'center',
-        color: 'rgba(0, 0, 0, 0.8)',
-    },
-    messageText: {
-        marginTop: 40,
-        fontFamily: 'Inter',
-        fontStyle: 'normal',
-        fontWeight: '500',
-        fontSize: 16,
-        textAlign: 'center',
-        color: 'rgba(0, 0, 0, 0.8)',
     },
 
     buttonText: {

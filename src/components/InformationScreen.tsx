@@ -38,7 +38,7 @@ export const InformationScreen = ({ navigation, route }) => {
                         navigation.navigate('ConfirmationScreen', {
                             title: 'Request sent successfully!',
                             message: 'Check your email for further details',
-                            noOfScreensToPop: 2,
+                            noOfScreensToPop: 3,
                         })
                     }
                 >

@@ -8,7 +8,6 @@ import ProfileIcon from 'src/assets/profile.svg';
 
 //@ts-ignore
 export const SettingsScreen = ({ navigation }) => {
-    console.log(navigation);
     return (
         <View style={styles.container}>
             <View style={{ marginBottom: 24 }}>
