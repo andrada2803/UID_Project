@@ -2,6 +2,8 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import React from 'react';
 import ConfirmationScreen from 'src/components/ConfirmationScreen/ConfirmationScreen';
 import { InformationScreen } from 'src/components/InformationScreen';
+import { LogInScreen } from 'src/features/Authentication/LogInScreen';
+import { SignUpScreen } from 'src/features/Authentication/SignUpScreen';
 import { GradeDetailsScreen } from 'src/features/GradebookScreen/GradeDetailsScreen';
 import { PaymentsScreen } from 'src/features/PaymentsScreen/PaymentsScreen';
 import { ServiceCategory } from 'src/features/PaymentsScreen/ServiceCategory/ServiceCategory';
@@ -17,12 +19,6 @@ import { SettingsScreen } from '../../features/SettingsScreen/SettingsScreen';
 import { SituationScreen } from '../../features/SituationScreen/SituationScreen';
 import TimetableScreen from '../../features/TimetableScreen/TimetableScreen';
 import { ToDoListScreen } from '../../features/ToDoListScreen/ToDoListScreen';
-import { ReporOverlapScreen } from '../../features/ReportOverlapScreen/ReportOverlapScreen';
-import { CreateAppointmentScreen } from '../../features/CreateAppointmentScreen/CreateAppointmentScreen';
-import { InformationScreen } from 'src/components/InformationScreen';
-import { GradeDetailsScreen } from 'src/features/GradebookScreen/GradeDetailsScreen';
-import { SignUpScreen } from 'src/features/Authentication/SignUpScreen';
-import { LogInScreen } from 'src/features/Authentication/LogInScreen';
 
 const MainStack = createNativeStackNavigator();
 const navigationHeaderOptions = {
