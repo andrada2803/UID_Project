@@ -17,6 +17,12 @@ import { SettingsScreen } from '../../features/SettingsScreen/SettingsScreen';
 import { SituationScreen } from '../../features/SituationScreen/SituationScreen';
 import TimetableScreen from '../../features/TimetableScreen/TimetableScreen';
 import { ToDoListScreen } from '../../features/ToDoListScreen/ToDoListScreen';
+import { ReporOverlapScreen } from '../../features/ReportOverlapScreen/ReportOverlapScreen';
+import { CreateAppointmentScreen } from '../../features/CreateAppointmentScreen/CreateAppointmentScreen';
+import { InformationScreen } from 'src/components/InformationScreen';
+import { GradeDetailsScreen } from 'src/features/GradebookScreen/GradeDetailsScreen';
+import { SignUpScreen } from 'src/features/Authentication/SignUpScreen';
+import { LogInScreen } from 'src/features/Authentication/LogInScreen';
 
 const MainStack = createNativeStackNavigator();
 const navigationHeaderOptions = {
@@ -31,7 +37,7 @@ const navigationHeaderOptions = {
 
 const MainStackNavigator = () => {
     return (
-        <MainStack.Navigator initialRouteName='Home'>
+        <MainStack.Navigator initialRouteName='LogIn'>
             <MainStack.Screen
                 name='Home'
                 component={HomeScreen}
@@ -124,6 +130,21 @@ const MainStackNavigator = () => {
                 name='PaymentDetails'
                 component={PaymentDetails}
                 options={navigationHeaderOptions}
+            />
+
+            <MainStack.Screen
+                name='SignUp'
+                component={SignUpScreen}
+                options={{
+                    headerShown: false,
+                }}
+            />
+            <MainStack.Screen
+                name='LogIn'
+                component={LogInScreen}
+                options={{
+                    headerShown: false,
+                }}
             />
         </MainStack.Navigator>
     );
