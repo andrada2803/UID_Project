@@ -8,6 +8,7 @@ import { GradeDetailsScreen } from 'src/features/GradebookScreen/GradeDetailsScr
 import { PaymentsScreen } from 'src/features/PaymentsScreen/PaymentsScreen';
 import { ServiceCategory } from 'src/features/PaymentsScreen/ServiceCategory/ServiceCategory';
 import { ServiceList } from 'src/features/PaymentsScreen/ServiceList/ServiceList';
+import AccountSettings from 'src/features/SettingsScreen/AccountSettings/AccountSettings';
 import { PaymentDetails } from 'src/features/SettingsScreen/PaymentDetails/PaymentDetails';
 import { CreateAppointmentScreen } from '../../features/CreateAppointmentScreen/CreateAppointmentScreen';
 import { GradebookScreen } from '../../features/GradebookScreen/GradebookScreen';
@@ -135,12 +136,19 @@ const MainStackNavigator = () => {
                     headerShown: false,
                 }}
             />
+
             <MainStack.Screen
                 name='LogIn'
                 component={LogInScreen}
                 options={{
                     headerShown: false,
                 }}
+            />
+
+            <MainStack.Screen
+                name='AccountSettings'
+                component={AccountSettings}
+                options={navigationHeaderOptions}
             />
         </MainStack.Navigator>
     );

@@ -21,7 +21,11 @@ export const SettingsScreen = ({ navigation }) => {
                 <TileButton title='General' icon={<SettingsProfileIcon />} />
             </View>
             <View style={{ marginBottom: 24 }}>
-                <TileButton title='Account' icon={<ProfileIcon />} />
+                <TileButton
+                    title='Account'
+                    icon={<ProfileIcon />}
+                    onPress={() => navigation.navigate('AccountSettings')}
+                />
             </View>
         </View>
     );
