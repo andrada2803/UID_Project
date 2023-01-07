@@ -1,5 +1,6 @@
 import { configureStore } from '@reduxjs/toolkit';
 import { TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux';
+import generalSlice from './generalSlice';
 import paymentSlice from './paymentSlice';
 import settingsSlice from './settingsSlice';
 
@@ -7,6 +8,7 @@ export const store = configureStore({
     reducer: {
         payments: paymentSlice,
         settings: settingsSlice,
+        general: generalSlice,
     },
 });
 
