@@ -16,6 +16,8 @@ import { ReporOverlapScreen } from '../../features/ReportOverlapScreen/ReportOve
 import { CreateAppointmentScreen } from '../../features/CreateAppointmentScreen/CreateAppointmentScreen';
 import { InformationScreen } from 'src/components/InformationScreen';
 import { GradeDetailsScreen } from 'src/features/GradebookScreen/GradeDetailsScreen';
+import { SignUpScreen } from 'src/features/Authentication/SignUpScreen';
+import { LogInScreen } from 'src/features/Authentication/LogInScreen';
 
 const MainStack = createNativeStackNavigator();
 const navigationHeaderOptions = {
@@ -30,7 +32,7 @@ const navigationHeaderOptions = {
 
 const MainStackNavigator = () => {
     return (
-        <MainStack.Navigator initialRouteName='Home'>
+        <MainStack.Navigator initialRouteName='LogIn'>
             <MainStack.Screen
                 name='Home'
                 component={HomeScreen}
@@ -113,6 +115,20 @@ const MainStackNavigator = () => {
                 name='Grade'
                 component={GradeDetailsScreen}
                 options={navigationHeaderOptions}
+            />
+            <MainStack.Screen
+                name='SignUp'
+                component={SignUpScreen}
+                options={{
+                    headerShown: false,
+                }}
+            />
+            <MainStack.Screen
+                name='LogIn'
+                component={LogInScreen}
+                options={{
+                    headerShown: false,
+                }}
             />
         </MainStack.Navigator>
     );
