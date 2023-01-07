@@ -6,6 +6,7 @@ import { GradeDetailsScreen } from 'src/features/GradebookScreen/GradeDetailsScr
 import { PaymentsScreen } from 'src/features/PaymentsScreen/PaymentsScreen';
 import { ServiceCategory } from 'src/features/PaymentsScreen/ServiceCategory/ServiceCategory';
 import { ServiceList } from 'src/features/PaymentsScreen/ServiceList/ServiceList';
+import { PaymentDetails } from 'src/features/SettingsScreen/PaymentDetails/PaymentDetails';
 import { CreateAppointmentScreen } from '../../features/CreateAppointmentScreen/CreateAppointmentScreen';
 import { GradebookScreen } from '../../features/GradebookScreen/GradebookScreen';
 import { GroupScreen } from '../../features/GroupScreen/GroupScreen';
@@ -116,6 +117,12 @@ const MainStackNavigator = () => {
             <MainStack.Screen
                 name='Grade'
                 component={GradeDetailsScreen}
+                options={navigationHeaderOptions}
+            />
+
+            <MainStack.Screen
+                name='PaymentDetails'
+                component={PaymentDetails}
                 options={navigationHeaderOptions}
             />
         </MainStack.Navigator>

@@ -9,7 +9,7 @@ import GreenCheckIcon from 'src/assets/greenCheck.svg';
 
 //@ts-ignore
 const ConfirmationScreen = ({ navigation, route }) => {
-    const { title, message } = route.params;
+    const { title, message, noOfScreensToPop } = route.params;
     return (
         <View style={styles.wrapper}>
             <GreenCheckIcon width={160} height={160} />
@@ -17,7 +17,9 @@ const ConfirmationScreen = ({ navigation, route }) => {
             <Text style={styles.messageText}>{message}</Text>
             <TouchableOpacity
                 style={styles.buttonContainer}
-                onPress={() => navigation.dispatch(StackActions.pop(3))}
+                onPress={() =>
+                    navigation.dispatch(StackActions.pop(noOfScreensToPop))
+                }
             >
                 <Text style={styles.buttonText}>GO BACK</Text>
             </TouchableOpacity>

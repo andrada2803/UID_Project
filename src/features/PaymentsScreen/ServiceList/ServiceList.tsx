@@ -39,6 +39,7 @@ export const ServiceList = ({ navigation }) => {
                             navigation.navigate('ConfirmationScreen', {
                                 title: confirmationScreenTitle,
                                 message: confirmationScreenMessage,
+                                noOfScreensToPop: 3,
                             });
                         }}
                     />
