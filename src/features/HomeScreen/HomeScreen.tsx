@@ -8,15 +8,19 @@ import GradebookIcon from '../../assets/GradebookIcon.svg'
 import SituationIcon from '../../assets/SituationIcon.svg'
 import PaymentsIcon from '../../assets/PaymentIcon.svg'
 import SettingsIcon from '../../assets/SettingsIcon.svg'
+import { useAppSelector } from 'src/stores/store';
 
 // @ts-ignore
 const HomeScreen = ({navigation}) => {
+
+  const currentUser = useAppSelector((state) => state.auth.currentLoggedInUser);
+
   return (
     <View style={styles.screenLayout}>
       <View style={{alignItems:'center'}}>
         <View style={styles.welcomeLayout}>
           <Text style={styles.welcomeTitle}>Welcome, </Text>
-          <Text style={styles.usernameTitle}>Shuri!</Text>
+          <Text style={styles.usernameTitle}>{currentUser.email}!</Text>
         </View>
       </View>
       <View style={styles.buttonsLayout}>

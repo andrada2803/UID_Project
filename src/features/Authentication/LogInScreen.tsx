@@ -19,6 +19,9 @@ import MailIcon from '../../assets/mail.svg';
 import LockIcon from '../../assets/lock.svg';
 import SeePassIcon from '../../assets/SeePass.svg';
 import { Snackbar } from 'react-native-paper';
+import { User } from 'src/models/User';
+import { setCurrentUser } from 'src/stores/authSlice';
+import { useAppDispatch, useAppSelector } from 'src/stores/store';
 
 // @ts-ignore
 export const LogInScreen = ({ navigation }) => {
@@ -27,6 +30,8 @@ export const LogInScreen = ({ navigation }) => {
     const [password, setPassword] = React.useState('');
     const [snackBarVisible, setVisible] = React.useState(false);
     const [snackBarText, setSnackBarText] = React.useState('');
+    const dispatch = useAppDispatch();
+    const users = useAppSelector((state) => state.auth.users);
 
     const handleLogIn = () => {
         if (email === '' || password === '') {
@@ -34,7 +39,16 @@ export const LogInScreen = ({ navigation }) => {
             setVisible(true);
         } else {
             if (email !== '' || password !== '') {
-                if (email === 'student' && password == 'student') {
+
+                const found = users.find(u => u.email === email && u.password === password);
+
+                if (found) {
+                    const newCurrentLoggedIn: User = {
+                        email:email,
+                        password:password,
+                        fullName:''
+                    };
+                    dispatch(setCurrentUser(newCurrentLoggedIn));
                     navigation.navigate('Home');
                 } else {
                     setSnackBarText('Email or password incorrect');
