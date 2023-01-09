@@ -8,13 +8,13 @@ export const assignmentsMock: Todo[] = [
     },
     {
         id: 2,
-        text: 'DS Assignment 1',
-        completed: true,
+        text: 'DS Assignment 3',
+        completed: false,
     },
     {
         id: 3,
         text: 'OS Project Assignment',
-        completed: true,
+        completed: false,
     },
     {
         id: 4,
