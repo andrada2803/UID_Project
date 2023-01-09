@@ -77,6 +77,7 @@ export const CreateAppointmentScreen = ({ navigation }) => {
                 setItems={setItems}
                 style={styles.dropdown}
             />
+            <Text style={styles.availabbleText}>Pick a date:</Text>
             <DatePicker
                 minimumDate={minDate}
                 maximumDate='2023-12-23'
@@ -93,7 +94,7 @@ export const CreateAppointmentScreen = ({ navigation }) => {
             />
 
             {isVisible && (
-                <Text style={styles.availabbleText}>Available hours:</Text>
+                <Text style={styles.pickDateText}>Available hours:</Text>
             )}  
 
             {isVisible && (
@@ -177,6 +178,12 @@ const styles = StyleSheet.create({
     },
 
     availabbleText: {
+        top:60,
+        fontSize:18,
+        fontFamily: 'Inter',
+    },
+
+    pickDateText: {
         top:20,
         fontSize:18,
         fontFamily: 'Inter',
