@@ -1,18 +1,29 @@
 import React from 'react'
 import {Text, View, StyleSheet, ScrollView, Pressable} from 'react-native'
+import { Snackbar } from 'react-native-paper';
 import { GradeCard } from './GradeCard';
 
 // @ts-ignore
 export const GradeDetailsScreen = ({ route, navigation }) => {
 
-    const {courseTitle,
+    const {key,courseTitle,
         gradeDate,
         professor,
         year,
         credits,
         score,
         maxScore,
-        type } = route.params;
+        type,
+        isRetake,
+        isRequest
+    } = route.params;
+
+    const [snackBarVisible, setVisible] = React.useState(false);
+    const [snackBarText, setSnackBarText] = React.useState('');
+    const onDismissSnackBar = () => setVisible(false);
+
+    console.log(isRetake)
+
   return (
     <View style={{flex:1,flexDirection:"column", margin:10}}>
         <ScrollView contentContainerStyle={{ paddingVertical: 10 }}>
@@ -33,21 +44,50 @@ export const GradeDetailsScreen = ({ route, navigation }) => {
         </View>
 
         <View style = {{flexDirection:"row", justifyContent:"space-between", marginTop:20}}>
-            <ActionButton backColor={"#FFDAD6"} textColor={"#410002"} description={"RETAKE"} onChoice={() =>
-                            navigation.navigate('InformationScreen', {
-                                title: "Retake exam!",
-                                message: "Are you sure you want to retake this exam?",
-                            })
+            <ActionButton disabled={!isRetake} backColor={"#FFDAD6"} textColor={"#410002"} description={"RETAKE"} onChoice={() =>
+                            {
+                                if(!isRetake){
+                                    setSnackBarText('Retake already sent for this grade! Pending...'); setVisible(true)
+                                }
+                                else{
+                                    navigation.navigate('InformationScreen', {
+                                        title: "Retake exam!",
+                                        message: "Are you sure you want to retake this exam?",
+                                        gradeKey: key,
+                                        type: "retake"
+                                    })
+                                }
+                            }
+                            
                         }/>
-            <ActionButton backColor={"#006688"} textColor={"white"} description={"REQUEST"} onChoice={() =>
-                            navigation.navigate('InformationScreen', {
-                                title: "Request another review!",
-                                message: "Are you sure you want to request another review?",
-                            })
+            <ActionButton disabled={!isRequest} backColor={"#006688"} textColor={"white"} description={"REQUEST"} onChoice={() =>
+
+                            {
+                                if(!isRequest){
+                                    setSnackBarText('Request already sent for this grade! Pending...'); setVisible(true)
+                                }
+                                else{
+                                    navigation.navigate('InformationScreen', {
+                                        title: "Request another review!",
+                                        message: "Are you sure you want to request another review?",
+                                        gradeKey: key,
+                                        type:"request"
+                                    })
+                                }
+                            }
+                            
                         }/>
+            
         </View>
 
         </ScrollView>
+        <Snackbar
+                wrapperStyle={{}}
+                visible={snackBarVisible}
+                onDismiss={onDismissSnackBar}
+            >
+                {snackBarText}
+            </Snackbar>
     </View>
   )
 }
