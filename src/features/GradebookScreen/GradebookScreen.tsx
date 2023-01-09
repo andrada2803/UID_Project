@@ -29,8 +29,6 @@ export const GradebookScreen = ({navigation}) => {
   const[search, setSearch] = useState('')
   const[currentFilter, setFilter] = useState("both")
 
-  console.log(currentGrades)
-
   
   function handleAllFilter() {
     setAll(true)
