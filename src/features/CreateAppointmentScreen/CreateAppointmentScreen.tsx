@@ -51,7 +51,7 @@ export const CreateAppointmentScreen = ({ navigation }) => {
             Alert.alert('Error', 'Please select a reason');
         } else if (selectedDate == '') {
             Alert.alert('Error', 'Please select a date');
-        } else if (valueHour == '') {
+        } else if (valueHour == null) {
             Alert.alert('Error', 'Please select an hour');
         }
         else {
