@@ -88,7 +88,6 @@ const styles = StyleSheet.create({
       fontWeight: 'bold',
       padding: 10,
       color: "#666666",
-      fontFamily: "Inter"
     },
 
     gradeDate: {
@@ -96,7 +95,6 @@ const styles = StyleSheet.create({
       fontStyle:"italic",
       padding:10,
       color: "#666666",
-      fontFamily: "Inter"
     },
 
     gradeContainer: {
@@ -109,7 +107,6 @@ const styles = StyleSheet.create({
       fontSize: 10,
       fontWeight: 'bold',
       color: "#666666",
-      fontFamily: "Inter"
     },
 
     circle: {
