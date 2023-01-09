@@ -30,38 +30,59 @@ const AppLayout = () => {
                     display: 'flex',
                     flexDirection: 'column',
                     justifyContent: 'center',
-                    padding: '0 24px',
-                    backgroundColor: '#cecece',
+                    padding: '0 36px',
+                    backgroundColor: '#fafafa',
+                    gap: '16px',
                 }}
             >
-                <List>
-                    <Link to='students' style={{ textDecoration: 'none' }}>
-                        <ListItem disablePadding>
-                            <ListItemButton>
-                                <ListItemText primary={'Students'} />
-                            </ListItemButton>
-                        </ListItem>
-                    </Link>
+                <Link
+                    to='students'
+                    style={{
+                        textDecoration: 'none',
+                        color: '#fff',
+                    }}
+                >
+                    <ListItemButton
+                        sx={{
+                            borderRadius: 2,
+                            backgroundColor: '#3B82F6',
+                            '&:hover': {
+                                color: 'rgba(0, 0, 0, 0.6)',
+                                fontWeight: '700',
+                            },
+                        }}
+                    >
+                        <ListItemText primary={'Students'} />
+                    </ListItemButton>
+                </Link>
 
-                    <Link to='appointments' style={{ textDecoration: 'none' }}>
-                        <ListItem
-                            disablePadding
-                            sx={{ textDecoration: 'none' }}
+                <Link
+                    to='appointments'
+                    style={{ textDecoration: 'none', color: '#fff' }}
+                >
+                    <ListItem disablePadding sx={{ textDecoration: 'none' }}>
+                        <ListItemButton
+                            sx={{
+                                borderRadius: 2,
+                                backgroundColor: '#F63B3B',
+                                '&:hover': {
+                                    color: 'rgba(0, 0, 0, 0.6)',
+                                    fontWeight: '700',
+                                },
+                            }}
                         >
-                            <ListItemButton>
-                                <ListItemText primary={'Appointments'} />
-                            </ListItemButton>
-                        </ListItem>
-                    </Link>
-                </List>
+                            <ListItemText primary={'Appointments'} />
+                        </ListItemButton>
+                    </ListItem>
+                </Link>
             </Box>
 
             <Box
                 sx={{
                     display: 'flex',
-                    justifyContent: 'center',
-                    alignItems: 'center',
-                    width: '100%',
+                    // justifyContent: 'center',
+                    // alignItems: 'center',
+                    // minWidth: '100%',
                 }}
             >
                 <Outlet />

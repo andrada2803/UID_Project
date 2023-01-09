@@ -16,12 +16,11 @@ import {
     DialogActions,
     DialogContent,
     DialogTitle,
-    IconButton,
     Stack,
-    Tooltip,
 } from '@mui/material';
 import { students } from '../../mock/Students';
 import { Person } from '../../model/Person';
+import moment from 'moment';
 
 const StudentsScreen: FC = () => {
     const [createModalOpen, setCreateModalOpen] = useState(false);
@@ -78,9 +77,10 @@ const StudentsScreen: FC = () => {
                     const isValid =
                         cell.column.id === 'email'
                             ? validateEmail(event.target.value)
-                            : cell.column.id === 'age'
-                            ? validateAge(+event.target.value)
+                            : cell.column.id === 'bdate'
+                            ? validateBdate(event.target.value)
                             : validateRequired(event.target.value);
+
                     if (!isValid) {
                         //set validation error for cell if invalid
                         setValidationErrors({
@@ -97,6 +97,7 @@ const StudentsScreen: FC = () => {
                 },
             };
         },
+
         [validationErrors]
     );
 
@@ -106,7 +107,7 @@ const StudentsScreen: FC = () => {
                 accessorKey: 'id',
                 header: 'ID',
                 enableColumnOrdering: false,
-                enableEditing: false, //disable editing on this column
+                enableEditing: true, //disable editing on this column
                 enableSorting: false,
                 size: 80,
             },
@@ -136,7 +137,7 @@ const StudentsScreen: FC = () => {
             },
             {
                 accessorKey: 'bdate',
-                header: 'Age',
+                header: 'Birth date',
                 muiTableBodyCellEditTextFieldProps: ({ cell }) => ({
                     ...getCommonEditTextFieldProps(cell),
                 }),
@@ -153,6 +154,8 @@ const StudentsScreen: FC = () => {
                         '& .Mui-TableHeadCell-Content': {
                             justifyContent: 'left',
                         },
+                        width: '100%',
+                        height: '100%',
                     },
                 }}
                 displayColumnDefOptions={{
@@ -170,26 +173,17 @@ const StudentsScreen: FC = () => {
                 enableEditing
                 onEditingRowSave={handleSaveRowEdits}
                 onEditingRowCancel={handleCancelRowEdits}
-                // renderRowActions={({ row, table }) => (
-                //     <Box sx={{ display: 'flex', gap: '1rem' }}>
-                //         <Tooltip arrow placement='left' title='Edit'>
-                //             <IconButton
-                //                 onClick={() => table.setEditingRow(row)}
-                //             >
-                //                 <Edit />
-                //             </IconButton>
-                //         </Tooltip>
-                //         <Tooltip arrow placement='right' title='Delete'>
-                //             <IconButton
-                //                 color='error'
-                //                 onClick={() => handleDeleteRow(row)}
-                //             >
-                //                 <Delete />
-                //             </IconButton>
-                //         </Tooltip>
-                //     </Box>
-                // )}
                 renderRowActionMenuItems={({ closeMenu, row, table }) => [
+                    <MenuItem
+                        key={2}
+                        onClick={() => handleDeleteRow(row)}
+                        sx={{ m: 0 }}
+                    >
+                        <ListItemIcon>
+                            <Delete />
+                        </ListItemIcon>
+                        Delete
+                    </MenuItem>,
                     <MenuItem
                         key={0}
                         onClick={() => {
@@ -216,26 +210,6 @@ const StudentsScreen: FC = () => {
                         </ListItemIcon>
                         Send Email
                     </MenuItem>,
-                    <MenuItem
-                        key={0}
-                        onClick={() => handleDeleteRow(row)}
-                        sx={{ m: 0 }}
-                    >
-                        <ListItemIcon>
-                            <Delete />
-                        </ListItemIcon>
-                        View Profile
-                    </MenuItem>,
-                    <MenuItem
-                        key={0}
-                        onClick={() => table.setEditingRow(row)}
-                        sx={{ m: 0 }}
-                    >
-                        <ListItemIcon>
-                            <Edit />
-                        </ListItemIcon>
-                        View Profile
-                    </MenuItem>,
                 ]}
                 renderTopToolbarCustomActions={() => (
                     <Button
@@ -243,7 +217,7 @@ const StudentsScreen: FC = () => {
                         onClick={() => setCreateModalOpen(true)}
                         variant='contained'
                     >
-                        Create New Account
+                        Add New Student
                     </Button>
                 )}
             />
@@ -271,8 +245,13 @@ export const CreateNewAccountModal: FC<{
         }, {} as any)
     );
 
+    const [validationErrors, setValidationErrors] = useState<{
+        [cellId: string]: string;
+    }>({});
+
     const handleSubmit = () => {
-        //put your validation logic here
+        if (Object.keys(validationErrors).length) return;
+
         onSubmit(values);
         onClose();
     };
@@ -294,12 +273,45 @@ export const CreateNewAccountModal: FC<{
                                 key={column.accessorKey}
                                 label={column.header}
                                 name={column.accessorKey}
+                                error={
+                                    !!validationErrors[column.accessorKey || '']
+                                }
+                                helperText={
+                                    validationErrors[column.accessorKey || '']
+                                }
                                 onChange={(e) =>
                                     setValues({
                                         ...values,
                                         [e.target.name]: e.target.value,
                                     })
                                 }
+                                onBlur={(event) => {
+                                    const isValid =
+                                        column.accessorKey === 'email'
+                                            ? validateEmail(event.target.value)
+                                            : column.accessorKey === 'bdate'
+                                            ? validateBdate(event.target.value)
+                                            : validateRequired(
+                                                  event.target.value
+                                              );
+
+                                    if (!isValid) {
+                                        //set validation error for cell if invalid
+                                        setValidationErrors({
+                                            ...validationErrors,
+                                            [column.accessorKey ||
+                                            '']: `${column.header} is required`,
+                                        });
+                                    } else {
+                                        //remove validation error for cell if valid
+                                        delete validationErrors[
+                                            column.accessorKey || ''
+                                        ];
+                                        setValidationErrors({
+                                            ...validationErrors,
+                                        });
+                                    }
+                                }}
                             />
                         ))}
                     </Stack>
@@ -312,7 +324,7 @@ export const CreateNewAccountModal: FC<{
                     onClick={handleSubmit}
                     variant='contained'
                 >
-                    Create New Account
+                    Add New Student
                 </Button>
             </DialogActions>
         </Dialog>
@@ -327,6 +339,9 @@ const validateEmail = (email: string) =>
         .match(
             /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
         );
-const validateAge = (age: number) => age >= 18 && age <= 50;
+const validateBdate = (bdate: string) => {
+    console.log(bdate);
+    return moment(bdate, 'DD/MM/YYYY', true).isValid();
+};
 
 export default StudentsScreen;
