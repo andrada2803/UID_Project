@@ -1,5 +1,6 @@
 import { configureStore } from '@reduxjs/toolkit';
 import { TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux';
+import authSlice from './authSlice';
 import generalSlice from './generalSlice';
 import paymentSlice from './paymentSlice';
 import settingsSlice from './settingsSlice';
@@ -9,6 +10,7 @@ export const store = configureStore({
         payments: paymentSlice,
         settings: settingsSlice,
         general: generalSlice,
+        auth: authSlice
     },
 });
 

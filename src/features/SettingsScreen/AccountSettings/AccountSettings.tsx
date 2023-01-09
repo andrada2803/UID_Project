@@ -1,13 +1,23 @@
 import React from 'react';
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { logOutUser } from 'src/stores/authSlice';
+import { useAppDispatch } from 'src/stores/store';
 
 //@ts-ignore
 const AccountSettings = ({ navigation }) => {
+
+    const dispatch = useAppDispatch();
+
+    const handleSignOut = () => {
+        dispatch(logOutUser);
+        navigation.replace('LogIn')
+    }
+
     return (
         <View style={styles.wrapper}>
             <TouchableOpacity
                 style={styles.buttonContainer}
-                onPress={() => navigation.replace('LogIn')}
+                onPress={() => handleSignOut()}
             >
                 <Text style={styles.buttonText}>SIGN OUT</Text>
             </TouchableOpacity>

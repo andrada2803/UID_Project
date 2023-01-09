@@ -51,7 +51,7 @@ export const GradeCard = (props:any) => {
               :
                <ExamTypeLabel icon={ColoquimIcon} label = {"Coloquim"} color={"#F5E652"}/> } 
             {props.isReview &&
-                <Pressable style={styles.button} onPress={() => props.navigation.navigate("Grade", {courseTitle:props.courseTitle, gradeDate:props.gradeDate, professor:props.professor, year:props.year, credits:props.credits, score: props.score, maxScore:props.maxScore, type:props.type})}>
+                <Pressable style={styles.button} onPress={() => props.navigation.navigate("Grade", {key:props.gradeKey, courseTitle:props.courseTitle, gradeDate:props.gradeDate, professor:props.professor, year:props.year, credits:props.credits, score: props.score, maxScore:props.maxScore, type:props.type, isRetake: props.retakeActive, isRequest:props.requestActive})}>
                     <Text style={styles.buttonText}>{"Review"}</Text>
                 </Pressable>   
             }   
@@ -87,7 +87,7 @@ const styles = StyleSheet.create({
       fontSize: 20,
       fontWeight: 'bold',
       padding: 10,
-      color: "#666666"
+      color: "#666666",
     },
 
     gradeDate: {
@@ -106,7 +106,7 @@ const styles = StyleSheet.create({
     professorText: {
       fontSize: 10,
       fontWeight: 'bold',
-      color: "#666666"
+      color: "#666666",
     },
 
     circle: {
