@@ -111,7 +111,8 @@ const styles = StyleSheet.create({
         fontSize: 14,
         fontWeight: 'bold',
         color: "#000000", 
-        margin:10
+        margin:10,
+        fontFamily: "Inter"
     },
 
     textStyle:{
@@ -119,7 +120,8 @@ const styles = StyleSheet.create({
         lineHeight:32,
         textAlign:"auto",
         margin:10,
-        borderRadius:10
+        borderRadius:10,
+        fontFamily: "Inter"
     },
 
     actionButton: {

@@ -176,7 +176,7 @@ const styles = StyleSheet.create({
     marginTop:20,
     marginBottom:10,
     marginLeft:5,
-    marginRight:5
+    marginRight:5,
   },
 
 
