@@ -8,6 +8,7 @@ import {
     Modal,
     Image,
     TextInput,
+    TouchableOpacity
 } from 'react-native';
 import DropDownPicker from 'react-native-dropdown-picker';
 
@@ -94,9 +95,10 @@ export const ReporOverlapScreen = ({ navigation }) => {
             <Text style={styles.note}>
                 What is marked with * is not mandatory
             </Text>
-            <View style={styles.submitButton}>
-                <Button title='Submit' onPress={handleSubmit} />
-            </View>
+
+            <TouchableOpacity style={styles.submitButton} onPress={handleSubmit}>
+                <Text style={styles.buttonText}>Submit</Text>
+            </TouchableOpacity>
         </View>
     );
 };
@@ -154,6 +156,14 @@ const styles = StyleSheet.create({
         flex: 1,
         //bottom: 10,
         justifyContent: 'flex-end',
+        borderRadius: 10,
+        backgroundColor: '#006688',
+        bottom: 30,
+        borderWidth: 2,
+        padding: 10,
+        position: 'absolute',
+        alignSelf: 'center',
+        width: 350
     },
 
     image: {
@@ -195,5 +205,10 @@ const styles = StyleSheet.create({
     note: {
         fontFamily: 'Inter',
         top: 70,
+    },
+    buttonText: {
+        color: 'white',
+        fontSize: 20,
+        alignSelf:'center'
     },
 });
