@@ -62,7 +62,6 @@ export const GradebookScreen = ({navigation}) => {
 
   const updateSearch = (search:any) => {
     setSearch(search);
-    console.log(currentFilter)
     if(currentFilter==="course"){
       const searchedGradeListByCourse = allGrades.filter(function (item) {
         return item.courseTitle.includes(search);
