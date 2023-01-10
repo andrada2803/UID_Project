@@ -82,6 +82,11 @@ export const GradebookScreen = ({navigation}) => {
         dispatch(setCurrentGradesListByCourseOrByYear(search))
       }
     }
+
+    if(search===""){
+      setGradeList(allGrades);
+      dispatch(setCurrentGradesListAll())
+    }
   };
   
 
