@@ -20,9 +20,9 @@ export const PaymentsScreen = ({ navigation }) => {
                     <Text style={styles.listLabelText}>SCHOLAR</Text>
 
                     <View style={styles.listWrapper}>
-                        {taxes.map((item) => (
+                        {taxes.map((item, index) => (
                             <View
-                                key={JSON.stringify(item)}
+                                key={index}
                                 style={{ paddingBottom: 16 }}
                             >
                                 <DropdownItem
@@ -40,9 +40,9 @@ export const PaymentsScreen = ({ navigation }) => {
                 <View style={styles.servicesContainer}>
                     <Text style={styles.listLabelText}>SERVICES</Text>
                     <View style={styles.listWrapper}>
-                        {taxes.map((item) => (
+                        {taxes.map((item,index) => (
                             <View
-                                key={JSON.stringify(item)}
+                                key={index}
                                 style={{ paddingBottom: 16 }}
                             >
                                 <DropdownItem
