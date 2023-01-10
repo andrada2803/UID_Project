@@ -18,9 +18,6 @@ export const InformationScreen = ({ navigation, route }) => {
 
 
     const { title, message,gradeKey,type } = route.params;
-
-    console.log(gradeKey)
-    console.log(type)
     
     return (
         <View style={styles.wrapper}>

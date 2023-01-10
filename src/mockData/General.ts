@@ -68,7 +68,7 @@ export const allGradesListMock: Grade[] = [
         score:90,
         maxScore:100,
         type:"coloquim",
-        isReview:false,
+        isReview:true,
         retakeActive: true,
         requestActive:true
     },
@@ -110,7 +110,7 @@ export const allGradesListMock: Grade[] = [
         score:40,
         maxScore:100,
         type: "exam",
-        isReview:false,
+        isReview:true,
         retakeActive: true,
         requestActive:true
     },

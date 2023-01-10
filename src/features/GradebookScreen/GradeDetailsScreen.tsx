@@ -22,8 +22,6 @@ export const GradeDetailsScreen = ({ route, navigation }) => {
     const [snackBarText, setSnackBarText] = React.useState('');
     const onDismissSnackBar = () => setVisible(false);
 
-    console.log(isRetake)
-
   return (
     <View style={{flex:1,flexDirection:"column", margin:10}}>
         <ScrollView contentContainerStyle={{ paddingVertical: 10 }}>
