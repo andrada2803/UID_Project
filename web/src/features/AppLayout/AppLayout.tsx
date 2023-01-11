@@ -36,7 +36,7 @@ const AppLayout = () => {
                 }}
             >
                 <Link
-                    to='students'
+                    to='assignments'
                     style={{
                         textDecoration: 'none',
                         color: '#fff',
@@ -52,12 +52,12 @@ const AppLayout = () => {
                             },
                         }}
                     >
-                        <ListItemText primary={'Students'} />
+                        <ListItemText primary={'Assignments'} />
                     </ListItemButton>
                 </Link>
 
                 <Link
-                    to='appointments'
+                    to='grades'
                     style={{ textDecoration: 'none', color: '#fff' }}
                 >
                     <ListItem disablePadding sx={{ textDecoration: 'none' }}>
@@ -71,7 +71,7 @@ const AppLayout = () => {
                                 },
                             }}
                         >
-                            <ListItemText primary={'Appointments'} />
+                            <ListItemText primary={'Grading'} />
                         </ListItemButton>
                     </ListItem>
                 </Link>
