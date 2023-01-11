@@ -5,8 +5,12 @@ import { Chip, Divider, Searchbar} from 'react-native-paper';
 import { Dropdown } from 'react-native-element-dropdown';
 import FilterIcon from '../../assets/charm_filter.svg'
 
+import { setCurrentGradesListAll,setCurrentGradesListByCourse,setCurrentGradesListByYear,setCurrentGradesList,setMissedGradesList,setCurrentGradesListByCourseOrByYear } from 'src/stores/generalSlice';
+import { useAppDispatch, useAppSelector } from 'src/stores/store';
+
 
 const data = [
+  { label: 'c&y', value: 'c&y' },
   { label: 'course', value: 'course' },
   { label: 'year', value: 'year' },
 ];
@@ -14,54 +18,77 @@ const data = [
 // @ts-ignore
 export const GradebookScreen = ({navigation}) => {
 
+  const allGrades = useAppSelector((state) => state.general.allGradesList);
+  const currentGrades = useAppSelector((state) => state.general.currentGradesList);
+  const dispatch = useAppDispatch();
+
   const [all, setAll] = useState(true);
   const[currentSemester, setCurrentSemester] = useState(false);
   const[missedGrades, setMissedGrades] = useState(false);
-  const[filteredListGrades, setGradeList] = useState(allGradesList)
+  const[filteredListGrades, setGradeList] = useState(allGrades)
   const[search, setSearch] = useState('')
-  const[currentFilter, setFilter] = useState('')
+  const[currentFilter, setFilter] = useState("both")
 
+  
   function handleAllFilter() {
     setAll(true)
     setCurrentSemester(false)
     setMissedGrades(false)
-    setGradeList(allGradesList)
+    setGradeList(allGrades)
+    dispatch(setCurrentGradesListAll())
   };
 
   function handleCurrentSemesterFilter () {
     setAll(false)
     setCurrentSemester(true)
     setMissedGrades(false)
-    setGradeList(currentSemesterGradesList)
+    const currentGrades = allGrades.filter(function (item) {
+      return item.year===4;
+    });
+    setGradeList(currentGrades)
+    dispatch(setCurrentGradesList())
   };
 
   function handleMissedGradesFilter(){
     setAll(false)
     setCurrentSemester(false)
     setMissedGrades(true)
-    setGradeList(missedGradesList)
+    const missedGrades = allGrades.filter(function (item) {
+      return item.score<50;
+    });
+    setGradeList(missedGrades)
+    dispatch(setMissedGradesList())
   };
 
   const updateSearch = (search:any) => {
     setSearch(search);
     if(currentFilter==="course"){
-      const searchedGradeListByCourse = allGradesList.filter(function (item) {
+      const searchedGradeListByCourse = allGrades.filter(function (item) {
         return item.courseTitle.includes(search);
       });
       setGradeList(searchedGradeListByCourse);
+      dispatch(setCurrentGradesListByCourse(search))
     }
     else{
       if(currentFilter === "year"){
-        const searchedGradeListByYear = allGradesList.filter(function (item) {
+        const searchedGradeListByYear = allGrades.filter(function (item) {
           return item.year===parseInt(search);
         });
         setGradeList(searchedGradeListByYear);
+        dispatch(setCurrentGradesListByYear(search))
       }
       else{
-        setGradeList(allGradesList);
+        setGradeList(allGrades);
+        dispatch(setCurrentGradesListByCourseOrByYear(search))
       }
     }
+
+    if(search===""){
+      setGradeList(allGrades);
+      dispatch(setCurrentGradesListAll())
+    }
   };
+  
 
   return (
     <View style ={{flex:1, flexDirection:"column"}}>
@@ -123,7 +150,7 @@ export const GradebookScreen = ({navigation}) => {
           labelField="label"
           valueField="value"
           placeholder=""
-          value={search}
+          value={currentFilter}
           onChange={item => {
             setFilter(item.value);
           }}
@@ -134,8 +161,8 @@ export const GradebookScreen = ({navigation}) => {
       }
 
       <ScrollView contentContainerStyle={{ paddingVertical: 20 }}>
-      {filteredListGrades.map(({ courseTitle, gradeDate, professor, year, credits, score, maxScore, type, isReview, key }) => (
-        <GradeCard navigation={navigation} courseTitle = {courseTitle} gradeDate={gradeDate} professor={professor} year={year} credits={credits} score = {score} maxScore = {maxScore} type={type} isReview={isReview} key={key}/>
+      {currentGrades.map(({ key,courseTitle, gradeDate, professor, year, credits, score, maxScore, type, isReview, requestActive,retakeActive }) => (
+        <GradeCard navigation={navigation} key = {key} gradeKey={key} courseTitle = {courseTitle} gradeDate={gradeDate} professor={professor} year={year} credits={credits} score = {score} maxScore = {maxScore} type={type} isReview={isReview} requestActive={requestActive} retakeActive={retakeActive}/>
       ))}
       </ScrollView>
     </View>
@@ -151,7 +178,7 @@ const styles = StyleSheet.create({
     marginTop:20,
     marginBottom:10,
     marginLeft:5,
-    marginRight:5
+    marginRight:5,
   },
 
 
@@ -209,135 +236,3 @@ const styles = StyleSheet.create({
 
 
 });
-
-const allGradesList = [
-  {
-    key: 1,
-    courseTitle: "Special Mathematics",
-    gradeDate:"12/03/2022 at 15:40PM",
-    professor:"Daniela Rosca",
-    year:1,
-    credits:6,
-    score:100,
-    maxScore:100,
-    type: "coloquim",
-    isReview:true
-  },
-  {
-    key: 2,
-    courseTitle: "Special Mathematics",
-    gradeDate:"12/03/2022 at 15:40PM",
-    professor:"Daniela Rosca",
-    year:2,
-    credits:6,
-    score:60,
-    maxScore:100,
-    type: "exam",
-    isReview:true
-  },
-  {
-    key: 3,
-    courseTitle: "Special Mathematics",
-    gradeDate:"12/03/2022 at 15:40PM",
-    professor:"Daniela Rosca",
-    year:3,
-    credits:6,
-    score:90,
-    maxScore:100,
-    type:"coloquim",
-    isReview:false
-  },
-  {
-    key: 4,
-    courseTitle: "Marketing",
-    gradeDate:"12/03/2022 at 15:40PM",
-    professor:"Daniela Rosca",
-    year:4,
-    credits:6,
-    score:40,
-    maxScore:100,
-    type:"coloquim",
-    isReview:true
-  },
-];
-
-
-const currentSemesterGradesList = [
-  {
-    key: 1,
-    courseTitle: "Distributed Systems",
-    gradeDate:"12/03/2022 at 15:40PM",
-    professor:"Cristina Pop",
-    year:4,
-    credits:6,
-    score:90,
-    maxScore:100,
-    type: "exam",
-    isReview:true
-  },
-  {
-    key: 2,
-    courseTitle: "Marketing",
-    gradeDate:"12/03/2022 at 15:40PM",
-    professor:"Daniela Rosca",
-    year:4,
-    credits:6,
-    score:100,
-    maxScore:100,
-    type: "exam",
-    isReview:true
-  },
-  
-];
-
-
-const missedGradesList = [
-  {
-    key: 1,
-    courseTitle: "Logic Design",
-    gradeDate:"12/03/2022 at 15:40PM",
-    professor:"Octavian Cret",
-    year:1,
-    credits:6,
-    score:40,
-    maxScore:100,
-    type: "exam",
-    isReview:false
-  },
-  {
-    key: 2,
-    courseTitle: "Special Mathematics",
-    gradeDate:"12/03/2022 at 15:40PM",
-    professor:"Daniela Rosca",
-    year:1,
-    credits:6,
-    score:45,
-    maxScore:100,
-    type: "exam",
-    isReview:true
-  },
-  {
-    key: 3,
-    courseTitle: "Digital Systems Design",
-    gradeDate:"12/03/2022 at 15:40PM",
-    professor:"Octavian Cret",
-    year:2,
-    credits:5,
-    score:50,
-    maxScore:100,
-    type:"exam",
-    isReview:true
-  },
-  {
-    key: 4,
-    courseTitle: "Special Mathematics",
-    gradeDate:"12/03/2022 at 15:40PM",
-    professor:"Daniela Rosca",
-    year:4,
-    credits:6,
-    score:40,
-    maxScore:100,
-    type:"coloquim",
-    isReview:true
-  },
-];

@@ -15,6 +15,9 @@ import MailIcon from '../../assets/mail.svg';
 import LockIcon from '../../assets/lock.svg';
 import ProfileIcon from '../../assets/shape.svg';
 import { Snackbar } from 'react-native-paper';
+import { User } from 'src/models/User';
+import { setCurrentUser,addUser } from 'src/stores/authSlice';
+import { useAppDispatch, useAppSelector } from 'src/stores/store';
 
 // @ts-ignore
 export const SignUpScreen = ({ navigation }) => {
@@ -26,6 +29,9 @@ export const SignUpScreen = ({ navigation }) => {
     const [passwordConfirm, setConfirmPassword] = React.useState('');
     const [snackBarVisible, setVisible] = React.useState(false);
     const [snackBarText, setSnackBarText] = React.useState('');
+
+    const dispatch = useAppDispatch();
+    const users = useAppSelector((state) => state.auth.users);
 
     const handleSignIn = () => {
         if (
@@ -43,7 +49,23 @@ export const SignUpScreen = ({ navigation }) => {
                 passwordConfirm !== ''
             ) {
                 if (password === passwordConfirm) {
-                    navigation.navigate('LogIn');
+
+                    const found = users.find(u => u.email === email);
+
+                    if(found){
+                        setSnackBarText('User already registered');
+                        setVisible(true);
+                    }
+                    else{
+                        const newUser: User = {
+                            email:email,
+                            password:password,
+                            fullName:''
+                        };
+                        dispatch(addUser(newUser));
+                        navigation.navigate('LogIn');
+                    }
+
                 } else {
                     setSnackBarText('Password mismatch');
                     setVisible(true);

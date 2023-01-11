@@ -8,9 +8,17 @@ import { Dimensions } from 'react-native';
 
 import InfoIcon from '../assets/InfoOutline.svg';
 
+import { disableRequestForGrade,disableRetakeForGrade } from 'src/stores/generalSlice';
+import { useAppDispatch} from 'src/stores/store';
+
 //@ts-ignore
 export const InformationScreen = ({ navigation, route }) => {
-    const { title, message } = route.params;
+
+    const dispatch = useAppDispatch();
+
+
+    const { title, message,gradeKey,type } = route.params;
+    
     return (
         <View style={styles.wrapper}>
             <InfoIcon width={160} height={160} />
@@ -35,11 +43,21 @@ export const InformationScreen = ({ navigation, route }) => {
                 <TouchableOpacity
                     style={styles.submitButton}
                     onPress={() =>
-                        navigation.navigate('ConfirmationScreen', {
-                            title: 'Request sent successfully!',
-                            message: 'Check your email for further details',
-                            noOfScreensToPop: 3,
-                        })
+                        {
+                            if(type === "request"){
+                                dispatch(disableRequestForGrade(gradeKey))
+                            }
+                            else{
+                                if(type ==="retake"){
+                                    dispatch(disableRetakeForGrade(gradeKey))
+                                }
+                            }
+                            navigation.navigate('ConfirmationScreen', {
+                                title: 'Request sent successfully!',
+                                message: 'Check your email for further details',
+                                noOfScreensToPop: 3,
+                            })
+                        }
                     }
                 >
                     <Text style={styles.submitText}>SUBMIT</Text>
