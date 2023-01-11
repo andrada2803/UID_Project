@@ -1,9 +1,11 @@
 import React from 'react';
 import {
+    Keyboard,
     StyleSheet,
     Text,
     TextInput,
     TouchableOpacity,
+    TouchableWithoutFeedback,
     View,
 } from 'react-native';
 import { updatePayment } from 'src/stores/settingsSlice';
@@ -68,7 +70,9 @@ export const PaymentDetails = ({ navigation }) => {
     };
 
     return (
+        <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
         <View style={styles.wrapper}>
+            
             <View>
                 <Text style={styles.inputLabel}>Credit Card Number</Text>
                 <TextInput
@@ -106,6 +110,7 @@ export const PaymentDetails = ({ navigation }) => {
             </View>
 
             <TouchableOpacity
+            disabled={isButtonDisabled}
                 style={[
                     styles.buttonContainer,
                     isButtonDisabled ? { backgroundColor: '#E2E6EE' } : {},
@@ -128,7 +133,9 @@ export const PaymentDetails = ({ navigation }) => {
                     CONFIRM
                 </Text>
             </TouchableOpacity>
+          
         </View>
+        </TouchableWithoutFeedback>
     );
 };
 
