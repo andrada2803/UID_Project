@@ -138,6 +138,31 @@ const AppLayout = () => {
                     </Link>
                 )}
 
+                {userType === UserType.PROFESSOR && (
+                    <Link
+                        to='timetable'
+                        style={{ textDecoration: 'none', color: '#fff' }}
+                    >
+                        <ListItem
+                            disablePadding
+                            sx={{ textDecoration: 'none' }}
+                        >
+                            <ListItemButton
+                                sx={{
+                                    borderRadius: 2,
+                                    backgroundColor: '#ffb825',
+                                    '&:hover': {
+                                        color: 'rgba(0, 0, 0, 0.6)',
+                                        fontWeight: '700',
+                                    },
+                                }}
+                            >
+                                <ListItemText primary={'Timetable'} />
+                            </ListItemButton>
+                        </ListItem>
+                    </Link>
+                )}
+
                 <Button
                     sx={{
                         position: 'absolute',

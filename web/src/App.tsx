@@ -1,20 +1,27 @@
-import React from 'react';
-import logo from './logo.svg';
 import './App.css';
 
-import StudentsScreen from './features/StudentsScreen/StudentsScreen';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import LoginScreen from './features/LoginScreen/LoginScreen';
-import AppLayout from './features/AppLayout/AppLayout';
-import TaxesScreen from './features/Taxes/TaxesScreen';
 import ProtectedRoute from './components/ProtectedRoute';
+import AppLayout from './features/AppLayout/AppLayout';
 import { AssignmentScreen } from './features/Assignment/AssignmentScreen';
 import { GradesScreen } from './features/Grades/Grades';
-import { useAppSelector } from './store/store';
+import LoginScreen from './features/LoginScreen/LoginScreen';
+import StudentsScreen from './features/StudentsScreen/StudentsScreen';
+import TaxesScreen from './features/Taxes/TaxesScreen';
+import ReportOverlapScreen from './features/TimetableScreen/ReportOverlapScreen';
+import TimetableScreen from './features/TimetableScreen/Timetablescreen';
 import { UserType } from './model/User';
+import { useAppSelector } from './store/store';
 
 function App() {
     // return <StudentsScreen />;
+    const events = {
+        Monday: ['9:00 PM Lecture', '10:00 SD Lecture'],
+        Tuesday: ['9:00 Meeting', '11:00 Workshop'],
+        Wednesday: ['9:00 Meeting', '10:00 Lecture', '13:00 Lunch'],
+        Thursday: ['9:00 Meeting', '10:00 Lecture', '15:00 Break'],
+        Friday: ['9:00 Meeting', '10:00 Lecture', '13:00 Lunch', '15:00 Break'],
+    };
 
     const userType = useAppSelector((state) => state.userState.user?.type);
 
@@ -88,6 +95,28 @@ function App() {
                             element={
                                 <ProtectedRoute>
                                     <GradesScreen />
+                                </ProtectedRoute>
+                            }
+                        />
+                    )}
+
+                    {userType === UserType.PROFESSOR && (
+                        <Route
+                            path='timetable'
+                            element={
+                                <ProtectedRoute>
+                                    <TimetableScreen timetable={events} />
+                                </ProtectedRoute>
+                            }
+                        />
+                    )}
+
+                    {userType === UserType.PROFESSOR && (
+                        <Route
+                            path='report'
+                            element={
+                                <ProtectedRoute>
+                                    <ReportOverlapScreen />
                                 </ProtectedRoute>
                             }
                         />
