@@ -60,10 +60,6 @@ const ReportOverlapScreen: FC<Props> = () => {
                 </div>
 
                 <div style={{ marginTop: '30px' }}>
-                    {/* <button style={{background: '#F63B3B', borderRadius: 5, fontSize: 20}} type="submit" >
-            <Link to='../timetable'>Submit</Link>
-            </button> */}
-
                     <Link
                         to='../timetable'
                         style={{

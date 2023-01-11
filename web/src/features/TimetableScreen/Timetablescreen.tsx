@@ -37,23 +37,6 @@ const TimetableScreen: FC<Props> = ({ timetable }) => {
                 </tbody>
             </table>
             <div style={{ marginTop: '30px', display: 'block' }}>
-                {/* <button style={{background: '#F63B3B', borderRadius: 5, fontSize: 20}}>
-                <Link to='../report'>Report Overlap</Link>
-            </button> */}
-
-                {/* <Button>
-                    sx={{
-                        borderRadius: 2,
-                        backgroundColor: '#ffb825',
-                        '&:hover': {
-                            color: 'rgba(0, 0, 0, 0.6)',
-                            fontWeight: '700',
-                        },
-                    }}
-                >
-                    <ListItemText primary={'Timetable'} />
-                </Button> */}
-
                 <Link
                     to='../report'
                     style={{
