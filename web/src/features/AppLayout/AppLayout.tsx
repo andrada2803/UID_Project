@@ -8,6 +8,7 @@ import ListItem from '@mui/material/ListItem';
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
+import Button from '@mui/material/Button';
 import {
     BrowserRouter as Router,
     Route,
@@ -15,9 +16,13 @@ import {
     Outlet,
 } from 'react-router-dom';
 import StudentsScreen from '../StudentsScreen/StudentsScreen';
-import Appointments from '../Appointments/Appointments';
+import Appointments from '../Taxes/TaxesScreen';
+import { useAppDispatch } from '../../store/store';
+import { logout, setUser } from '../../store/user/userSlice';
 
 const AppLayout = () => {
+    const dispatch = useAppDispatch();
+
     return (
         <Box
             sx={{
@@ -71,18 +76,32 @@ const AppLayout = () => {
                                 },
                             }}
                         >
-                            <ListItemText primary={'Appointments'} />
+                            <ListItemText primary={'Taxes'} />
                         </ListItemButton>
                     </ListItem>
                 </Link>
+
+                <Button
+                    sx={{
+                        position: 'absolute',
+                        bottom: 20,
+                        backgroundColor: '#cecece',
+                        color: 'white',
+                        '&:hover': {
+                            color: 'black',
+                        },
+                    }}
+                    onClick={() => {
+                        dispatch(logout());
+                    }}
+                >
+                    Log out
+                </Button>
             </Box>
 
             <Box
                 sx={{
                     display: 'flex',
-                    // justifyContent: 'center',
-                    // alignItems: 'center',
-                    // minWidth: '100%',
                 }}
             >
                 <Outlet />
