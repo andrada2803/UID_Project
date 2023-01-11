@@ -17,11 +17,13 @@ import {
 } from 'react-router-dom';
 import StudentsScreen from '../StudentsScreen/StudentsScreen';
 import Appointments from '../Taxes/TaxesScreen';
-import { useAppDispatch } from '../../store/store';
+import { useAppDispatch, useAppSelector } from '../../store/store';
 import { logout, setUser } from '../../store/user/userSlice';
+import { UserType } from '../../model/User';
 
 const AppLayout = () => {
     const dispatch = useAppDispatch();
+    const userType = useAppSelector((state) => state.userState.user?.type);
 
     return (
         <Box
@@ -40,46 +42,101 @@ const AppLayout = () => {
                     gap: '16px',
                 }}
             >
-                <Link
-                    to='students'
-                    style={{
-                        textDecoration: 'none',
-                        color: '#fff',
-                    }}
-                >
-                    <ListItemButton
-                        sx={{
-                            borderRadius: 2,
-                            backgroundColor: '#3B82F6',
-                            '&:hover': {
-                                color: 'rgba(0, 0, 0, 0.6)',
-                                fontWeight: '700',
-                            },
+                {userType === UserType.SECRETARY && (
+                    <Link
+                        to='students'
+                        style={{
+                            textDecoration: 'none',
+                            color: '#fff',
                         }}
                     >
-                        <ListItemText primary={'Students'} />
-                    </ListItemButton>
-                </Link>
-
-                <Link
-                    to='appointments'
-                    style={{ textDecoration: 'none', color: '#fff' }}
-                >
-                    <ListItem disablePadding sx={{ textDecoration: 'none' }}>
                         <ListItemButton
                             sx={{
                                 borderRadius: 2,
-                                backgroundColor: '#F63B3B',
+                                backgroundColor: '#3B82F6',
                                 '&:hover': {
                                     color: 'rgba(0, 0, 0, 0.6)',
                                     fontWeight: '700',
                                 },
                             }}
                         >
-                            <ListItemText primary={'Taxes'} />
+                            <ListItemText primary={'Students'} />
                         </ListItemButton>
-                    </ListItem>
-                </Link>
+                    </Link>
+                )}
+
+                {userType === UserType.SECRETARY && (
+                    <Link
+                        to='tax'
+                        style={{ textDecoration: 'none', color: '#fff' }}
+                    >
+                        <ListItem
+                            disablePadding
+                            sx={{ textDecoration: 'none' }}
+                        >
+                            <ListItemButton
+                                sx={{
+                                    borderRadius: 2,
+                                    backgroundColor: '#F63B3B',
+                                    '&:hover': {
+                                        color: 'rgba(0, 0, 0, 0.6)',
+                                        fontWeight: '700',
+                                    },
+                                }}
+                            >
+                                <ListItemText primary={'Taxes'} />
+                            </ListItemButton>
+                        </ListItem>
+                    </Link>
+                )}
+
+                {userType === UserType.PROFESSOR && (
+                    <Link
+                        to='assignments'
+                        style={{
+                            textDecoration: 'none',
+                            color: '#fff',
+                        }}
+                    >
+                        <ListItemButton
+                            sx={{
+                                borderRadius: 2,
+                                backgroundColor: '#3B82F6',
+                                '&:hover': {
+                                    color: 'rgba(0, 0, 0, 0.6)',
+                                    fontWeight: '700',
+                                },
+                            }}
+                        >
+                            <ListItemText primary={'Assignments'} />
+                        </ListItemButton>
+                    </Link>
+                )}
+
+                {userType === UserType.PROFESSOR && (
+                    <Link
+                        to='grades'
+                        style={{ textDecoration: 'none', color: '#fff' }}
+                    >
+                        <ListItem
+                            disablePadding
+                            sx={{ textDecoration: 'none' }}
+                        >
+                            <ListItemButton
+                                sx={{
+                                    borderRadius: 2,
+                                    backgroundColor: '#F63B3B',
+                                    '&:hover': {
+                                        color: 'rgba(0, 0, 0, 0.6)',
+                                        fontWeight: '700',
+                                    },
+                                }}
+                            >
+                                <ListItemText primary={'Grading'} />
+                            </ListItemButton>
+                        </ListItem>
+                    </Link>
+                )}
 
                 <Button
                     sx={{

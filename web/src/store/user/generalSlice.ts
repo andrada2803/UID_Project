@@ -45,17 +45,12 @@ export const generalSlice = createSlice({
             state,
             action: PayloadAction<{ taxId: string; studentId: string }>
         ) => {
-            console.log('actionu', action.payload);
             state.taxesToStudents = state.taxesToStudents.filter(
                 (item) =>
                     !(
                         item.student.id === action.payload.studentId &&
                         item.tax.id === action.payload.taxId
                     )
-            );
-            console.log(
-                '🚀 ~ file: generalSlice.ts:56 ~ state.taxesToStudents',
-                state.taxesToStudents
             );
         },
 
@@ -69,6 +64,17 @@ export const generalSlice = createSlice({
             });
         },
         updateTax: (state, action: PayloadAction<Tax>) => {
+            // action.payload
+
+            console.log(
+                '🚀 ~ file: generalSlice.ts:78 ~ action.payload',
+                action.payload
+            );
+            console.log(
+                '🚀 ~ file: generalSlice.ts:81 ~ state.taxes=state.taxes.map ~ state.taxes',
+                state.taxes
+            );
+
             state.taxes = state.taxes.map((item) => {
                 if (item.id === action.payload.id) {
                     return { ...item, ...action.payload };

@@ -46,12 +46,19 @@ const TaxesScreen: FC = () => {
     }>({});
 
     const handleCreateNewRow = (values: Tax) => {
-        dispatch(addToTaxes(values));
+        dispatch(
+            addToTaxes({
+                ...values,
+                id: (
+                    values.description.length * 32 +
+                    values.name.length * 11
+                ).toString(),
+            })
+        );
     };
 
     const handleAssignTax = (student: Person) => {
         // if (!selectedTax) return;
-        console.log('taxa selectataaaaa', selectedTax);
 
         dispatch(
             addToTaxesToStudents({
@@ -133,6 +140,14 @@ const TaxesScreen: FC = () => {
 
     const columns = useMemo<MRT_ColumnDef<Tax>[]>(
         () => [
+            {
+                accessorKey: 'id',
+                header: 'ID',
+                enableColumnOrdering: false,
+                enableEditing: false, //disable editing on this column
+                enableSorting: false,
+                size: 80,
+            },
             {
                 accessorKey: 'name',
                 header: 'Name',

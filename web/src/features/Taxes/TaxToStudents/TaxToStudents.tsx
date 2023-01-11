@@ -44,10 +44,11 @@ const TaxToStudents: FC = () => {
             }
             //send api delete request here, then refetch or update local table data for re-render
 
-            console.log(
-                '🚀 ~ file: TaxToStudents.tsx:50 ~ taxesToStudents[row.index]',
-                taxesToStudents[row.index]
-            );
+            // console.log(
+            //     '🚀 ~ file: TaxToStudents.tsx:58 ~ row.index',
+            //     row.index
+            // );
+
             dispatch(
                 removeTaxToStudent({
                     taxId: taxesToStudents[row.index].tax.id,
@@ -96,8 +97,8 @@ const TaxToStudents: FC = () => {
                 columns={columns}
                 data={taxesToStudents}
                 editingMode='modal' //default
-                enableColumnOrdering
                 enableEditing
+                enableColumnOrdering
                 renderRowActions={({ row, table }) => (
                     <Box sx={{ display: 'flex', gap: '1rem' }}>
                         <Tooltip arrow placement='right' title='Delete'>
